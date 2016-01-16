@@ -27,6 +27,13 @@ namespace StackOverflowNotifier
             this.InitializeComponent();
         }
 
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+
+            await App.StackOverflowConnector.GetUnansweredQuestionByTag("windows-10");
+        }
+
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(LoginPage));

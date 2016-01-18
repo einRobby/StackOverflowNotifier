@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using StackOverflowNotifier.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,5 +16,17 @@ namespace StackOverflowNotifier.Models
         public string Title { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
+        [JsonProperty(PropertyName = "tags")]
+        public List<string> Tags { get; set; }
+        [JsonProperty(PropertyName = "creation_date")]
+        public long CreationDateEpoch { get; set; }
+
+        public DateTime CreationDate
+        {
+            get
+            {
+                return Helper.FromUnixEpochTime(CreationDateEpoch);
+            }
+        }
     }
 }

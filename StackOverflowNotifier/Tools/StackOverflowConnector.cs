@@ -24,7 +24,14 @@ namespace StackOverflowNotifier.Tools
         {
             var requestUri = new Uri(_BaseUrl + $"/2.2/questions/unanswered?pagesize=30&order=desc&sort=creation&tagged={tag}&site=stackoverflow");
             var response = await _HttpClient.GetStringAsync(requestUri);
-            var json = JObject.Parse(response);
+
+            Encoding iso = Encoding.GetEncoding("ISO-8859-1");
+            Encoding utf8 = Encoding.UTF8;
+            byte[] utfBytes = utf8.GetBytes(response);
+            byte[] isoBytes = Encoding.Convert(utf8, iso, utfBytes);
+            string msg = iso.GetString(isoBytes);
+
+            var json = JObject.Parse(msg);
 
             var questions = JsonConvert.DeserializeObject<List<Question>>(json["items"].ToString());
             return questions;

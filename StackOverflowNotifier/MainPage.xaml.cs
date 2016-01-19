@@ -17,6 +17,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
+using Windows.UI.ViewManagement;
+using Windows.UI;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -30,24 +32,33 @@ namespace StackOverflowNotifier
         public MainPage()
         {
             this.InitializeComponent();
+            var stackOverflowRed = (Color)Application.Current.Resources["StackOverflowRed"];
+
+            ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Colors.White;
+            ApplicationView.GetForCurrentView().TitleBar.InactiveForegroundColor = Colors.Wheat;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveForegroundColor = Colors.Wheat;
+            ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = stackOverflowRed;
+            ApplicationView.GetForCurrentView().TitleBar.InactiveBackgroundColor = stackOverflowRed;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = stackOverflowRed;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = stackOverflowRed;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            await ReloadQuestions();            
+            await ReloadQuestions();
         }
 
         private async Task ReloadQuestions()
         {
             ProgressIndicator.Visibility = Visibility.Visible;
 
-            // Load questions for all tags            
+            // Load questions for all tags
             var questions = new List<Question>();
             foreach (var tag in MainViewModel.Current.Tags)
             {
                 var questionsForTag = await App.StackOverflowConnector.GetUnansweredQuestionByTag(tag);
-                questions.InsertRange(0, questionsForTag);               
+                questions.InsertRange(0, questionsForTag);
             }
 
             // Oder questions
@@ -96,6 +107,6 @@ namespace StackOverflowNotifier
         private async void TagsDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
         {
             await ReloadQuestions();
-        }        
+        }
     }
 }

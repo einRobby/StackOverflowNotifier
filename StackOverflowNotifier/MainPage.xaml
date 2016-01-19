@@ -1,105 +1,59 @@
 ﻿<Page
+    x:Class="StackOverflowNotifier.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:StackOverflowNotifier"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Tools="using:StackOverflowNotifier.Tools"
-    x:Class="StackOverflowNotifier.MainPage"
-    mc:Ignorable="d"
-    >
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:StackOverflowNotifier"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
 
     <Page.Resources>
-        <Tools:DateFormatConverter x:Key="DateFormatConverter"/>
+        <Tools:DateFormatConverter x:Key="DateFormatConverter" />
+        <Tools:HtmlDecodeConverter x:Key="HtmlDecodeConverter" />
     </Page.Resources>
     <Page.DataContext>
-        <StaticResource ResourceKey="MainViewModel"/>
+        <StaticResource ResourceKey="MainViewModel" />
     </Page.DataContext>
 
-    <Page.BottomAppBar>
+    <!--<Page.BottomAppBar>
         <CommandBar>
             <CommandBar.SecondaryCommands>
-                <AppBarButton x:Name="LoginButton" Label="Login" Click="LoginButton_Click" />
+                <AppBarButton
+                    x:Name="LoginButton"
+                    Click="LoginButton_Click"
+                    Label="Login" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Page.BottomAppBar>-->
 
-    <Grid Background="#FFA500" RequestedTheme="Dark">
+    <Grid Background="{StaticResource StackOverflowOrangeBrush}" RequestedTheme="Dark">
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <StackPanel Grid.Row="0">
-            <TextBlock HorizontalAlignment="Left" Text="Unanswered questions" Padding="20" Style="{StaticResource SubheaderTextBlockStyle}"/>
-        </StackPanel>
-
-        <!-- Tags -->
-        <Grid Grid.Row="1" Margin="20, 0" Padding="0, 0, 0, 20">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
-
-            <Button x:Name="TagsButton" Content="Tags..." Margin="0, 0, 10, 0" Click="TagsButton_Click"/>
-
-            <ListView x:Name="TagList" SelectionMode="None" Grid.Column="1" ItemsSource="{Binding Tags}" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Disabled">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" TextAlignment="Center"  />
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-
-                <ListView.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
-        </Grid>
-
-        <!-- Questions -->
-        <ListView x:Name="QuestionList" SelectionMode="None" ItemsSource="{Binding Questions}" ItemClick="QuestionList_ItemClick" IsItemClickEnabled="True" Grid.Row="2" Background="White" RequestedTheme="Light">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Padding="10, 10">
-                        <TextBlock Text="{Binding Title}" Style="{StaticResource SubtitleTextBlockStyle}" FontSize="16" />
-                        <TextBlock Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}, Mode=OneWay}" FontSize="12" Margin="0,5,0,0" >
-                            <TextBlock.Foreground>
-                                <SolidColorBrush Color="{ThemeResource SystemBaseMediumHighColor}"/>
-                            </TextBlock.Foreground>
-                        </TextBlock>
-                        <ItemsControl x:Name="listView" ItemsSource="{Binding Tags}" Margin="0,10,0,0" IsHitTestVisible="False">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Grid Background="#FFB9B9B9" Padding="10, 5" Margin="0,0,5,0">
-                                        <TextBlock Text="{Binding}" TextAlignment="Center" FontSize="12"  />
-                                    </Grid>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <VirtualizingStackPanel Orientation="Horizontal"/>
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-
-        <ContentDialog x:Name="TagsDialog" Grid.RowSpan="3" RequestedTheme="Light" VerticalAlignment="Center" PrimaryButtonText="Close" Closed="TagsDialog_Closed" d:IsHidden="True">
+        <!--  Tag Editor  -->
+        <ContentDialog
+            x:Name="TagsDialog"
+            Grid.RowSpan="3"
+            VerticalAlignment="Center"
+            Closed="TagsDialog_Closed"
+            PrimaryButtonText="Close"
+            RequestedTheme="Light"
+            d:IsHidden="True">
             <Grid Margin="0,10">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Tags" Style="{StaticResource SubtitleTextBlockStyle}" Margin="0,0,0,10" />
+                <TextBlock
+                    Margin="0,0,0,10"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="Tags" />
 
                 <Grid Grid.Row="1" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
@@ -107,10 +61,13 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <TextBox x:Name="NewTagTextBox" PlaceholderText="Add a new tag" Margin="0,0,10,0" KeyDown="NewTagTextBox_KeyDown"/>
+                    <TextBox
+                        x:Name="NewTagTextBox"
+                        KeyDown="NewTagTextBox_KeyDown"
+                        PlaceholderText="Add a new tag" />
                 </Grid>
 
-                <ListView Grid.Row="2" ItemsSource="{Binding Tags}" >
+                <ListView Grid.Row="2" ItemsSource="{Binding Tags}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -119,22 +76,136 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="{Binding}" Margin="0,0,10,0" VerticalAlignment="Center"/>
-                                <AppBarButton x:Name="DeleteTagButton" Grid.Column="1" IsCompact="True" Icon="Cancel" Click="DeleteTagButton_Click" />
+                                <TextBlock
+                                    Margin="0,0,10,0"
+                                    VerticalAlignment="Center"
+                                    Text="{Binding}" />
+                                <AppBarButton
+                                    x:Name="DeleteTagButton"
+                                    Grid.Column="1"
+                                    Click="DeleteTagButton_Click"
+                                    Icon="Cancel"
+                                    IsCompact="True" />
                             </Grid>
                         </DataTemplate>
                     </ListView.ItemTemplate>
 
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
                         </Style>
                     </ListView.ItemContainerStyle>
                 </ListView>
             </Grid>
         </ContentDialog>
 
-        <ProgressRing x:Name="ProgressIndicator" Grid.RowSpan="3" IsActive="True" Width="60" Height="60" Visibility="Collapsed"/>
-    </Grid>
+        <ProgressRing
+            x:Name="ProgressIndicator"
+            Grid.RowSpan="3"
+            Width="60"
+            Height="60"
+            IsActive="True"
+            Visibility="Collapsed" />
 
+        <!--  Header  -->
+        <StackPanel Grid.Row="0">
+            <TextBlock
+                HorizontalAlignment="Left"
+                Padding="20"
+                Style="{StaticResource SubheaderTextBlockStyle}"
+                Text="Unanswered questions" />
+        </StackPanel>
+
+        <!--  Tags  -->
+        <Grid
+            Grid.Row="1"
+            Margin="20, 0"
+            Padding="0, 0, 0, 20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button
+                x:Name="TagsButton"
+                Margin="0, 0, 10, 0"
+                Click="TagsButton_Click"
+                Content="Tags..." />
+
+            <ListView
+                x:Name="TagList"
+                Grid.Column="1"
+                ItemsSource="{Binding Tags}"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                SelectionMode="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" TextAlignment="Center" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Grid>
+
+        <!--  Questions  -->
+        <ListView
+            x:Name="QuestionList"
+            Grid.Row="2"
+            Background="White"
+            IsItemClickEnabled="True"
+            ItemClick="QuestionList_ItemClick"
+            ItemsSource="{Binding Questions}"
+            RequestedTheme="Light"
+            SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Padding="10, 10">
+                        <TextBlock
+                            FontSize="16"
+                            Style="{StaticResource SubtitleTextBlockStyle}"
+                            Text="{Binding Title, Converter={StaticResource HtmlDecodeConverter}}" />
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            FontSize="12"
+                            Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}">
+                            <TextBlock.Foreground>
+                                <SolidColorBrush Color="{ThemeResource SystemBaseMediumHighColor}" />
+                            </TextBlock.Foreground>
+                        </TextBlock>
+                        <ItemsControl
+                            x:Name="listView"
+                            Margin="0,10,0,0"
+                            IsHitTestVisible="False"
+                            ItemsSource="{Binding Tags}">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid
+                                        Margin="0,0,5,0"
+                                        Background="#FFB9B9B9"
+                                        Padding="10, 5">
+                                        <TextBlock
+                                            FontSize="12"
+                                            Text="{Binding}"
+                                            TextAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <VirtualizingStackPanel Orientation="Horizontal" />
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                        </ItemsControl>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
 </Page>

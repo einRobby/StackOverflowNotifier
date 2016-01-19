@@ -1,20 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
 namespace StackOverflowNotifier.Tools
 {
-    public sealed class DateFormatConverter : IValueConverter
+    public sealed class HtmlDecodeConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, string language)
         {
-            if (!(value is DateTime))
+            if (!(value is string))
                 return value;
 
-            return ((DateTime)value).ToString("f");
+            return WebUtility.HtmlDecode(((string)value));
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)

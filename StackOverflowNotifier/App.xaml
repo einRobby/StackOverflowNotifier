@@ -8,5 +8,12 @@
 
     <Application.Resources>
         <viewModels:MainViewModel x:Key="MainViewModel" />
+
+        <!--  Colors  -->
+        <Color x:Key="StackOverflowOrange">#F37E22</Color>
+        <Color x:Key="StackOverflowRed">#f26721</Color>
+
+        <SolidColorBrush x:Key="StackOverflowOrangeBrush" Color="{ThemeResource StackOverflowOrange}" />
+        <SolidColorBrush x:Key="StackOverflowRedBrush" Color="{ThemeResource StackOverflowRed}" />
     </Application.Resources>
 </Application>

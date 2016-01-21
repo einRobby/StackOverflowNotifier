@@ -46,6 +46,8 @@ namespace StackOverflowNotifier
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            await MainViewModel.Current.LoadAsync();
             await ReloadQuestions();
         }
 
@@ -106,6 +108,7 @@ namespace StackOverflowNotifier
 
         private async void TagsDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
         {
+            await MainViewModel.Current.SaveAsync();
             await ReloadQuestions();
         }
     }

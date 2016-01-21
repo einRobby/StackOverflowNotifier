@@ -1,5 +1,7 @@
 ﻿using GalaSoft.MvvmLight;
+using Newtonsoft.Json;
 using StackOverflowNotifier.Models;
+using StackOverflowNotifier.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -54,6 +56,21 @@ namespace StackOverflowNotifier.ViewModels
 
                 Tags = new ObservableCollection<string>();                
             }
+        }
+
+        public async Task SaveAsync()
+        {
+            var json = await JsonConvert.SerializeObjectAsync(Tags);
+            await LocalStorage.SaveAsync("tags.json", json);
+        }
+
+        public async Task LoadAsync()
+        {
+            var json = await LocalStorage.LoadAsync("tags.json");
+            if (json != null)
+            {
+                Tags = await JsonConvert.DeserializeObjectAsync<ObservableCollection<string>>(json);
+            }            
         }
     }
 }

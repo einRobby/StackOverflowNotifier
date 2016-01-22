@@ -34,6 +34,13 @@ namespace StackOverflowNotifier.ViewModels
             set { _Tags = value; RaisePropertyChanged();  }
         }
 
+        private int _NewQuestionCount;
+        public int NewQuestionCount
+        {
+            get { return _NewQuestionCount; }
+            set { _NewQuestionCount = value; RaisePropertyChanged(); }
+        }
+
 
         public MainViewModel()
         {
@@ -56,6 +63,38 @@ namespace StackOverflowNotifier.ViewModels
 
                 Tags = new ObservableCollection<string>();                
             }
+        }
+
+        public async Task LoadQuestionsAsync()
+        {
+            // Load questions for all tags
+            var questionLists = new List<List<Question>>();
+            foreach (var tag in Tags)
+            {
+                var questionsForTag = await App.StackOverflowConnector.GetUnansweredQuestionByTag(tag);
+                questionLists.Add(questionsForTag);
+            }
+
+            // Merge and oder questions
+            var orderedQuestions = App.StackOverflowConnector.MergeQuestions(questionLists);
+           
+            // Mark new questions
+            var oldQuestionsJson = await LocalStorage.LoadAsync("questions.json");
+            if (oldQuestionsJson != null)
+            {
+                var oldQuestions = await JsonConvert.DeserializeObjectAsync<ObservableCollection<Question>>(oldQuestionsJson);
+                App.StackOverflowConnector.MarkNewQuestions(orderedQuestions, oldQuestions.ToList());
+                NewQuestionCount = orderedQuestions.Count(q => q.IsNew);
+                Toaster.ShowSimpleToastNotification($"{NewQuestionCount} new unanswered questions for your tags.");
+            }
+
+            // Sync questions with ViewModel
+            Questions.Clear();
+            Questions = new ObservableCollection<Question>(orderedQuestions);
+
+            // Save questions locally
+            var newQuestionsJson = await JsonConvert.SerializeObjectAsync(Questions);
+            await LocalStorage.SaveAsync("questions.json", newQuestionsJson);
         }
 
         public async Task SaveAsync()

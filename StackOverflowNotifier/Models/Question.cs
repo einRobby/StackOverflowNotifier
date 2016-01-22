@@ -20,6 +20,7 @@ namespace StackOverflowNotifier.Models
         public List<string> Tags { get; set; }
         [JsonProperty(PropertyName = "creation_date")]
         public long CreationDateEpoch { get; set; }
+        public bool IsNew { get; set; }
 
         public DateTime CreationDate
         {

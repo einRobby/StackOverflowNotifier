@@ -54,22 +54,7 @@ namespace StackOverflowNotifier
         private async Task ReloadQuestions()
         {
             ProgressIndicator.Visibility = Visibility.Visible;
-
-            // Load questions for all tags
-            var questions = new List<Question>();
-            foreach (var tag in MainViewModel.Current.Tags)
-            {
-                var questionsForTag = await App.StackOverflowConnector.GetUnansweredQuestionByTag(tag);
-                questions.InsertRange(0, questionsForTag);
-            }
-
-            // Oder questions
-            var orderedQuestions = questions.OrderByDescending(x => x.CreationDate);
-
-            // Sync questions with ViewModel
-            MainViewModel.Current.Questions.Clear();
-            MainViewModel.Current.Questions = new ObservableCollection<Question>(orderedQuestions);
-
+            await MainViewModel.Current.LoadQuestionsAsync();
             ProgressIndicator.Visibility = Visibility.Collapsed;
         }
 
@@ -82,7 +67,10 @@ namespace StackOverflowNotifier
         {
             var item = e.ClickedItem as Question;
             if (item != null)
+            {
+                item.IsNew = false;
                 await Launcher.LaunchUriAsync(new Uri(item.Link));
+            }
         }
 
         private async void TagsButton_Click(object sender, RoutedEventArgs e)

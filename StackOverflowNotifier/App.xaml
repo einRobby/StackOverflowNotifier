@@ -12,8 +12,11 @@
         <!--  Colors  -->
         <Color x:Key="StackOverflowOrange">#F37E22</Color>
         <Color x:Key="StackOverflowRed">#f26721</Color>
+        <Color x:Key="StackOverflowGrey">#B9B9B9</Color>
 
+        <!-- Color Brushes -->
         <SolidColorBrush x:Key="StackOverflowOrangeBrush" Color="{ThemeResource StackOverflowOrange}" />
         <SolidColorBrush x:Key="StackOverflowRedBrush" Color="{ThemeResource StackOverflowRed}" />
+        <SolidColorBrush x:Key="StackOverflowGreyBrush" Color="{ThemeResource StackOverflowGrey}" />
     </Application.Resources>
 </Application>

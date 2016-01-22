@@ -13,15 +13,21 @@ namespace StackOverflowNotifier.UWP.BackgroundTask
     {        
         public async void Run(IBackgroundTaskInstance taskInstance)
         {
+            // Initialize
             BackgroundTaskDeferral _deferral = taskInstance.GetDeferral();
+            MainViewModel.Current = new MainViewModel();
 
             // Load new questions
-            //await MainViewModel.Current.LoadAsync();
+            await MainViewModel.Current.LoadAsync();
 
             // Show Notification if needed
             if (MainViewModel.Current.NewQuestionCount > 0)
             {
                 Toaster.ShowSimpleToastNotification($"{MainViewModel.Current.NewQuestionCount} new unanswered questions for your tags.");
+            }
+            else
+            {
+                Toaster.ShowSimpleToastNotification("No new unanswered questions found for your tags.");
             }
 
             _deferral.Complete();

@@ -7,6 +7,8 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -25,7 +27,7 @@ namespace StackOverflowNotifier
         public static readonly string ClientId = "6301";
         public static readonly string RedirectUri = "https://stackexchange.com/oauth/login_success";
         public static string AccessToken;
-        public static string Expires;
+        public static string Expires;        
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -107,6 +109,19 @@ namespace StackOverflowNotifier
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        internal static void SetColors()
+        {
+            var stackOverflowRed = (Color)Application.Current.Resources["StackOverflowRed"];
+
+            ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Colors.White;
+            ApplicationView.GetForCurrentView().TitleBar.InactiveForegroundColor = Colors.Wheat;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveForegroundColor = Colors.Wheat;
+            ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = stackOverflowRed;
+            ApplicationView.GetForCurrentView().TitleBar.InactiveBackgroundColor = stackOverflowRed;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = stackOverflowRed;
+            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = stackOverflowRed;
         }
     }
 }

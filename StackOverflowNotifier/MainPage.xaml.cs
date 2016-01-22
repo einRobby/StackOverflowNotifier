@@ -19,6 +19,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI;
 using StackOverflowNotifier.UWP.Shared.ViewModels;
 using StackOverflowNotifier.Shared.Models;
+using Windows.ApplicationModel.Background;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -32,18 +33,25 @@ namespace StackOverflowNotifier
         public MainPage()
         {
             this.InitializeComponent();
-            var stackOverflowRed = (Color)Application.Current.Resources["StackOverflowRed"];
+            App.SetColors();
+            RegisterBackgroundTask();
+        }
 
-            ApplicationView.GetForCurrentView().TitleBar.ForegroundColor = Colors.White;
-            ApplicationView.GetForCurrentView().TitleBar.InactiveForegroundColor = Colors.Wheat;
-            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveForegroundColor = Colors.Wheat;
-            ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = stackOverflowRed;
-            ApplicationView.GetForCurrentView().TitleBar.InactiveBackgroundColor = stackOverflowRed;
-            ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = stackOverflowRed;
-            ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = stackOverflowRed;
+        private async void RegisterBackgroundTask()
+        {            
+            var taskName = "UnreadNotifierTask";
+            
+            if (!BackgroundTaskRegistration.AllTasks.Any(t => t.Value.Name == taskName))
+            {
+                await BackgroundExecutionManager.RequestAccessAsync();                
 
-
-            //var builder = new BackgroundTaskBuilder
+                var builder = new BackgroundTaskBuilder();
+                builder.Name = taskName;
+                builder.TaskEntryPoint = "StackOverflowNotifier.UWP.BackgroundTask.UnreadNotifierTask";
+                builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+                builder.SetTrigger(new TimeTrigger(15, false));
+                builder.Register();
+            }            
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

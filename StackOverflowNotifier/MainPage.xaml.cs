@@ -1,6 +1,4 @@
-﻿using StackOverflowNotifier.Models;
-using StackOverflowNotifier.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
@@ -19,6 +17,8 @@ using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
 using Windows.UI.ViewManagement;
 using Windows.UI;
+using StackOverflowNotifier.UWP.Shared.ViewModels;
+using StackOverflowNotifier.Shared.Models;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -41,6 +41,9 @@ namespace StackOverflowNotifier
             ApplicationView.GetForCurrentView().TitleBar.InactiveBackgroundColor = stackOverflowRed;
             ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = stackOverflowRed;
             ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = stackOverflowRed;
+
+
+            //var builder = new BackgroundTaskBuilder
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

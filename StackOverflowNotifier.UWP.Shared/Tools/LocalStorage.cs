@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.Storage;
 
-namespace StackOverflowNotifier.Tools
+namespace StackOverflowNotifier.UWP.Shared.Tools
 {
     public static class LocalStorage
     {

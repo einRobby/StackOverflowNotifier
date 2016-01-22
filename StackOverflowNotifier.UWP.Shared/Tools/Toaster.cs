@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Windows.Data.Xml.Dom;
 using Windows.UI.Notifications;
 
-namespace StackOverflowNotifier.Tools
+namespace StackOverflowNotifier.UWP.Shared.Tools
 {
     public static class Toaster
     {

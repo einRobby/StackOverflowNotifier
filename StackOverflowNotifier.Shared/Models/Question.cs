@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
-using StackOverflowNotifier.Tools;
+using StackOverflowNotifier.Shared.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StackOverflowNotifier.Models
+namespace StackOverflowNotifier.Shared.Models
 {
     public class Question
     {

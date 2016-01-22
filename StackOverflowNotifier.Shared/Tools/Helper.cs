@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StackOverflowNotifier.Tools
+namespace StackOverflowNotifier.Shared.Tools
 {
     public static class Helper
     {

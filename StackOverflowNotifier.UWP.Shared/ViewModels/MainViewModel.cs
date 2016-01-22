@@ -1,7 +1,8 @@
 ﻿using GalaSoft.MvvmLight;
 using Newtonsoft.Json;
-using StackOverflowNotifier.Models;
-using StackOverflowNotifier.Tools;
+using StackOverflowNotifier.Shared.Models;
+using StackOverflowNotifier.Shared.Tools;
+using StackOverflowNotifier.UWP.Shared.Tools;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -9,7 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StackOverflowNotifier.ViewModels
+namespace StackOverflowNotifier.UWP.Shared.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
@@ -71,21 +72,20 @@ namespace StackOverflowNotifier.ViewModels
             var questionLists = new List<List<Question>>();
             foreach (var tag in Tags)
             {
-                var questionsForTag = await App.StackOverflowConnector.GetUnansweredQuestionByTag(tag);
+                var questionsForTag = await StackOverflowConnector.GetUnansweredQuestionByTag(tag);
                 questionLists.Add(questionsForTag);
             }
 
             // Merge and oder questions
-            var orderedQuestions = App.StackOverflowConnector.MergeQuestions(questionLists);
+            var orderedQuestions = StackOverflowConnector.MergeQuestions(questionLists);
            
             // Mark new questions
             var oldQuestionsJson = await LocalStorage.LoadAsync("questions.json");
             if (oldQuestionsJson != null)
             {
                 var oldQuestions = await JsonConvert.DeserializeObjectAsync<ObservableCollection<Question>>(oldQuestionsJson);
-                App.StackOverflowConnector.MarkNewQuestions(orderedQuestions, oldQuestions.ToList());
-                NewQuestionCount = orderedQuestions.Count(q => q.IsNew);
-                Toaster.ShowSimpleToastNotification($"{NewQuestionCount} new unanswered questions for your tags.");
+                StackOverflowConnector.MarkNewQuestions(orderedQuestions, oldQuestions.ToList());
+                NewQuestionCount = orderedQuestions.Count(q => q.IsNew);                
             }
 
             // Sync questions with ViewModel

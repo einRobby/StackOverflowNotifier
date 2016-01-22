@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:StackOverflowNotifier"
-    xmlns:viewModels="using:StackOverflowNotifier.ViewModels"
+    xmlns:viewModels="using:StackOverflowNotifier.UWP.Shared.ViewModels"
     RequestedTheme="Light">
 
     <Application.Resources>

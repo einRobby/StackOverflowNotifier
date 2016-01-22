@@ -1,25 +1,21 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using StackOverflowNotifier.Models;
+using StackOverflowNotifier.Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Windows.Web.Http;
 
-namespace StackOverflowNotifier.Tools
+namespace StackOverflowNotifier.Shared.Tools
 {
-    public class StackOverflowConnector
+    public static class StackOverflowConnector
     {
-        private readonly string _BaseUrl = "https://api.stackexchange.com";
-        private HttpClient _HttpClient;
-
-        public StackOverflowConnector()
-        {
-            _HttpClient = new HttpClient();
-        }
+        private static readonly string _BaseUrl = "https://api.stackexchange.com";
+        private static HttpClient _HttpClient = new HttpClient();
 
         /// <summary>
         /// Loads a list of unanswered questions from Stack Overflow that matches the given tag
@@ -27,11 +23,19 @@ namespace StackOverflowNotifier.Tools
         /// <param name="tag">Stack Overflow tag</param>
         /// <param name="size">number of results</param>
         /// <returns>list of questions</returns>
-        public async Task<List<Question>> GetUnansweredQuestionByTag(string tag, int size = 30)
+        public static async Task<List<Question>> GetUnansweredQuestionByTag(string tag, int size = 30)
         {
-            var requestUri = new Uri(_BaseUrl + $"/2.2/questions/unanswered?pagesize={size}&order=desc&sort=creation&tagged={tag}&site=stackoverflow");
-            var response = await _HttpClient.GetStringAsync(requestUri);
-            var json = JObject.Parse(response);
+            var handler = new HttpClientHandler();
+            if (handler.SupportsAutomaticDecompression)
+            {
+                handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate;
+            }
+
+            _HttpClient = new HttpClient(handler);
+
+            var url = $"{_BaseUrl}/2.2/questions/unanswered?pagesize={size}&order=desc&sort=creation&tagged={tag}&site=stackoverflow";
+            var respone = await _HttpClient.GetStringAsync(url);
+            var json = JObject.Parse(respone);
 
             var questions = JsonConvert.DeserializeObject<List<Question>>(json["items"].ToString());
             return questions;
@@ -42,7 +46,7 @@ namespace StackOverflowNotifier.Tools
         /// </summary>
         /// <param name="questionLists">list of question lists</param>
         /// <returns>ordered and merged questions</returns>
-        public List<Question> MergeQuestions(List<List<Question>> questionLists)
+        public static List<Question> MergeQuestions(List<List<Question>> questionLists)
         {
             var mergedQuestions = new List<Question>();
 
@@ -63,7 +67,7 @@ namespace StackOverflowNotifier.Tools
         /// </summary>
         /// <param name="newQuestions">list of recently loaded questions</param>
         /// <param name="oldQuestions">list of previously lodaded questions to compare</param>
-        public void MarkNewQuestions(List<Question> newQuestions, List<Question> oldQuestions)
+        public static void MarkNewQuestions(List<Question> newQuestions, List<Question> oldQuestions)
         {
             foreach (var question in newQuestions)
             {

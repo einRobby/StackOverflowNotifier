@@ -16,9 +16,10 @@ namespace StackOverflowNotifier.UWP.BackgroundTask
             // Initialize
             BackgroundTaskDeferral _deferral = taskInstance.GetDeferral();
             MainViewModel.Current = new MainViewModel();
+            await MainViewModel.Current.LoadAsync();
 
             // Load new questions
-            await MainViewModel.Current.LoadAsync();
+            await MainViewModel.Current.LoadQuestionsAsync();
 
             // Show Notification if needed
             if (MainViewModel.Current.NewQuestionCount > 0)

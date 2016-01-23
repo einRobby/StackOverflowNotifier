@@ -111,6 +111,31 @@ namespace StackOverflowNotifier
             deferral.Complete();
         }
 
+        protected override void OnActivated(IActivatedEventArgs args)
+        {
+            base.OnActivated(args);
+
+            // Handle toast activation
+            if (args.Kind == ActivationKind.ToastNotification)
+            {
+
+            }
+
+            // Prepare frame
+            Frame rootFrame = Window.Current.Content as Frame;
+            if (rootFrame == null)
+            {
+                rootFrame = new Frame();
+                rootFrame.NavigationFailed += OnNavigationFailed;
+                Window.Current.Content = rootFrame;
+            }
+
+            // Navigate and pass information
+            rootFrame.Navigate(typeof(MainPage));
+            Window.Current.Activate();
+
+        }
+
         internal static void SetColors()
         {
             var stackOverflowRed = (Color)Application.Current.Resources["StackOverflowRed"];

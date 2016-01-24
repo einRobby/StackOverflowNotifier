@@ -50,7 +50,7 @@ namespace StackOverflowNotifier.UWP
 
             // Clear notifications
             NotificationHelper.DeleteAllNotifications();
-        }        
+        }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -73,7 +73,7 @@ namespace StackOverflowNotifier.UWP
             {
                 ConnectionFailedMessage.Visibility = Visibility.Visible;
             }
-                        
+
             ProgressIndicator.Visibility = Visibility.Collapsed;
         }
 
@@ -90,6 +90,7 @@ namespace StackOverflowNotifier.UWP
         private async void TagsButton_Click(object sender, RoutedEventArgs e)
         {
             await TagsDialog.ShowAsync();
+            NotificationHelper.ShowSimpleToastNotification("ads", "asd");
         }
 
         private void DeleteTagButton_Click(object sender, RoutedEventArgs e)

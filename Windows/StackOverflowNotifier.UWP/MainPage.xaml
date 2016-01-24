@@ -6,10 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="using:StackOverflowNotifier.UWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" NavigationCacheMode="Enabled">
+    NavigationCacheMode="Enabled"
+    mc:Ignorable="d">
 
     <Page.Resources>
-        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Converter:DateFormatConverter x:Key="DateFormatConverter" />
         <Converter:HtmlDecodeConverter x:Key="HtmlDecodeConverter" />
     </Page.Resources>
@@ -109,19 +110,39 @@
             Grid.RowSpan="3"
             Width="60"
             Height="60"
-            IsActive="True" Canvas.ZIndex="100" >
+            Canvas.ZIndex="100"
+            IsActive="True">
             <ProgressRing.Foreground>
-                <SolidColorBrush Color="{StaticResource StackOverflowOrange}"/>
+                <SolidColorBrush Color="{StaticResource StackOverflowOrange}" />
             </ProgressRing.Foreground>
         </ProgressRing>
         <Grid Margin="0" VerticalAlignment="Top">
             <TextBlock
-        		HorizontalAlignment="Left"
-        		Padding="20"
-        		Style="{StaticResource SubheaderTextBlockStyle}"
-        		Text="Unanswered questions" Margin="0,0,0,-1" d:LayoutOverrides="Height, TopPosition, BottomPosition" />
-            <Border BorderThickness="1" HorizontalAlignment="Right" Width="40" VerticalAlignment="Center" Height="40" Margin="0,10,20,0" Background="{StaticResource StackOverflowGreyBrush}" CornerRadius="40">
-                <TextBlock Text="{Binding NewQuestionCount}" Margin="0,-3,0,0" d:LayoutOverrides="Height" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Black" FontWeight="Bold" />
+                Margin="0,0,0,-1"
+                HorizontalAlignment="Left"
+                Padding="20"
+                Style="{StaticResource SubheaderTextBlockStyle}"
+                Text="Unanswered questions"
+                d:LayoutOverrides="Height, TopPosition, BottomPosition" />
+            <Border
+                Width="40"
+                Height="40"
+                Margin="0,10,20,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                BorderThickness="1"
+                CornerRadius="40">
+                <Border.Background>
+                    <SolidColorBrush Color="White" />
+                </Border.Background>
+                <TextBlock
+                    Margin="0,-3,0,0"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Text="{Binding NewQuestionCount}"
+                    d:LayoutOverrides="Height" />
             </Border>
         </Grid>
 
@@ -183,20 +204,27 @@
                             Text="{Binding Title, Converter={StaticResource HtmlDecodeConverter}}" />
                         <Grid Margin="0,5,0,0">
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto"/>
-                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock
-                        		Margin="0"
-                        		FontSize="12"
-                        		Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}" VerticalAlignment="Bottom" d:LayoutOverrides="Width, LeftPosition, RightPosition">
+                                Margin="0"
+                                VerticalAlignment="Bottom"
+                                FontSize="12"
+                                Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}"
+                                d:LayoutOverrides="Width, LeftPosition, RightPosition">
                                 <TextBlock.Foreground>
                                     <SolidColorBrush Color="{ThemeResource SystemBaseMediumHighColor}" />
                                 </TextBlock.Foreground>
                             </TextBlock>
                             <TextBlock
-                            	Margin="10,0,0,0"
-                            	FontSize="12" VerticalAlignment="Bottom" Text="NEW" Grid.Column="1" HorizontalAlignment="Left" Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}">
+                                Grid.Column="1"
+                                Margin="10,0,0,0"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Bottom"
+                                FontSize="12"
+                                Text="NEW"
+                                Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}">
                                 <TextBlock.Foreground>
                                     <SolidColorBrush Color="{StaticResource StackOverflowOrange}" />
                                 </TextBlock.Foreground>
@@ -232,13 +260,33 @@
             </ListView.ItemTemplate>
         </ListView>
 
-        <Grid x:Name="ConnectionFailedMessage" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" RequestedTheme="Light" Margin="20" Visibility="Collapsed">
+        <Grid
+            x:Name="ConnectionFailedMessage"
+            Grid.Row="2"
+            Margin="20"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center"
+            RequestedTheme="Light"
+            Visibility="Collapsed">
             <StackPanel>
-                <TextBlock Text="Something went wrong :(" HorizontalAlignment="Center" Style="{StaticResource SubtitleTextBlockStyle}"/>
-                <TextBlock HorizontalAlignment="Center" TextWrapping="Wrap" TextAlignment="Center" Margin="0,10,0,0">
-                    We could not connect to the server.<LineBreak/> Please check your network connetion and try again.
-                </TextBlock> 
-                <Button Content="Try again" Click="RefreshButton_Click" HorizontalAlignment="Center" Margin="0,10,0,0"/>
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    Style="{StaticResource SubtitleTextBlockStyle}"
+                    Text="Something went wrong :(" />
+                <TextBlock
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    TextAlignment="Center"
+                    TextWrapping="Wrap">
+                    We could not connect to the server.
+                    <LineBreak />
+                    Please check your network connetion and try again.
+                </TextBlock>
+                <Button
+                    Margin="0,10,0,0"
+                    HorizontalAlignment="Center"
+                    Click="RefreshButton_Click"
+                    Content="Try again" />
             </StackPanel>
         </Grid>
     </Grid>

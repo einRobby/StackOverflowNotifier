@@ -27,7 +27,7 @@ namespace StackOverflowNotifier.UWP
         public static readonly string ClientId = "6301";
         public static readonly string RedirectUri = "https://stackexchange.com/oauth/login_success";
         public static string AccessToken;
-        public static string Expires;                     
+        public static string Expires;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -39,7 +39,7 @@ namespace StackOverflowNotifier.UWP
                 Microsoft.ApplicationInsights.WindowsCollectors.Metadata |
                 Microsoft.ApplicationInsights.WindowsCollectors.Session);
             this.InitializeComponent();
-            this.Suspending += OnSuspending;            
+            this.Suspending += OnSuspending;
         }
 
         /// <summary>

@@ -1,0 +1,2 @@
+MainPackage=D:\Source\Privat\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\bin\x86\Release\Upload\StackOverflowNotifier.UWP_1.0.0.0_x86.appx
+SymbolPackage=D:\Source\Privat\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\AppPackages\StackOverflowNotifier.UWP_1.0.0.0\StackOverflowNotifier.UWP_1.0.0.0_x86.appxsym

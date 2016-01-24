@@ -16,19 +16,27 @@ namespace StackOverflowNotifier.UWP.BackgroundTask
             // Initialize
             BackgroundTaskDeferral _deferral = taskInstance.GetDeferral();
             MainViewModel.Current = new MainViewModel();
-            await MainViewModel.Current.LoadAsync();
+            await MainViewModel.Current.LoadTagsAsync();
 
             // Load new questions
             await MainViewModel.Current.LoadQuestionsAsync();
 
             // Show Notification if needed
             if (MainViewModel.Current.NewQuestionCount > 0)
-            {
-                Toaster.ShowSimpleToastNotification($"{MainViewModel.Current.NewQuestionCount} new unanswered questions for your tags.");
-            }
-            else
-            {
-                Toaster.ShowSimpleToastNotification("No new unanswered questions found for your tags.");
+            {                
+                // Delete all other notifications
+                NotificationHelper.DeleteAllNotifications();
+
+                // Check if 'question' needs to be plural
+                var plural = "s";
+                if (MainViewModel.Current.NewQuestionCount > 1)
+                    plural = "";
+
+                // Show notification
+                NotificationHelper.ShowSimpleToastNotification("Stack Overflow", $"{MainViewModel.Current.NewQuestionCount} new unanswered question{plural}.");
+
+                // Update tile
+                NotificationHelper.UpdateBadgeCounter(MainViewModel.Current.NewQuestionCount);
             }
 
             _deferral.Complete();

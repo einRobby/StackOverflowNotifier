@@ -8,15 +8,15 @@ using Windows.UI.Notifications;
 
 namespace StackOverflowNotifier.UWP.Shared.Tools
 {
-    public static class Toaster
+    public static class NotificationHelper
     {
-        public static void ShowSimpleToastNotification(string text)
+        public static void ShowSimpleToastNotification(string title, string text)
         {
             // template to load for showing Toast Notification
             var xmlToastTemplate = "<toast launch=\"app-defined-string\">" +
                                      "<visual>" +
                                        "<binding template =\"ToastGeneric\">" +
-                                         "<text>Stack Overflow</text>" +
+                                         "<text>" + title + "</text>" +
                                          "<text>" +
                                            text +
                                          "</text>" +
@@ -30,8 +30,25 @@ namespace StackOverflowNotifier.UWP.Shared.Tools
 
             // create the toast notification and show to user
             var toastNotification = new ToastNotification(xmlDocument);
-            var notification = ToastNotificationManager.CreateToastNotifier();
+            var notification = ToastNotificationManager.CreateToastNotifier();         
             notification.Show(toastNotification);
+        }
+
+        public static void UpdateBadgeCounter(int number)
+        {
+            var badgeXml = BadgeUpdateManager.GetTemplateContent(BadgeTemplateType.BadgeNumber);
+
+            XmlElement badgeElement = (XmlElement)badgeXml.SelectSingleNode("/badge");
+            badgeElement.SetAttribute("value", number.ToString());
+
+            BadgeNotification badgeNotification = new BadgeNotification(badgeXml);
+            BadgeUpdateManager.CreateBadgeUpdaterForApplication().Update(badgeNotification);
+        }
+
+        public static void DeleteAllNotifications()
+        {
+            ToastNotificationManager.History.Clear();
+            UpdateBadgeCounter(0);            
         }
     }
 }

@@ -133,7 +133,6 @@ namespace StackOverflowNotifier
             // Navigate and pass information
             rootFrame.Navigate(typeof(MainPage));
             Window.Current.Activate();
-
         }
 
         internal static void SetColors()

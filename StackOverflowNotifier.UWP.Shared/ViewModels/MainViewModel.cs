@@ -97,13 +97,13 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             await LocalStorage.SaveAsync("questions.json", newQuestionsJson);
         }
 
-        public async Task SaveAsync()
+        public async Task SaveTagsAsync()
         {
             var json = await JsonConvert.SerializeObjectAsync(Tags);
             await LocalStorage.SaveAsync("tags.json", json);
         }
 
-        public async Task LoadAsync()
+        public async Task LoadTagsAsync()
         {
             var json = await LocalStorage.LoadAsync("tags.json");
             if (json != null)

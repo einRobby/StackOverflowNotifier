@@ -20,6 +20,7 @@ using Windows.UI;
 using StackOverflowNotifier.UWP.Shared.ViewModels;
 using StackOverflowNotifier.Shared.Models;
 using Windows.ApplicationModel.Background;
+using StackOverflowNotifier.UWP.Shared.Tools;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -32,9 +33,15 @@ namespace StackOverflowNotifier
     {
         public MainPage()
         {
+            // Initialize page
             this.InitializeComponent();
             App.SetColors();
+
+            // Register background task
             RegisterBackgroundTask();
+
+            // Clear notifications
+            NotificationHelper.DeleteAllNotifications();
         }
 
         private async void RegisterBackgroundTask()
@@ -58,7 +65,7 @@ namespace StackOverflowNotifier
         {
             base.OnNavigatedTo(e);
 
-            await MainViewModel.Current.LoadAsync();
+            await MainViewModel.Current.LoadTagsAsync();
             await ReloadQuestions();
         }
 
@@ -107,7 +114,7 @@ namespace StackOverflowNotifier
 
         private async void TagsDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
         {
-            await MainViewModel.Current.SaveAsync();
+            await MainViewModel.Current.SaveTagsAsync();
             await ReloadQuestions();
         }
     }

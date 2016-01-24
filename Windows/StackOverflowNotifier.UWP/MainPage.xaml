@@ -111,18 +111,21 @@
             Width="60"
             Height="60"
             Canvas.ZIndex="100"
-            IsActive="True">
+            IsActive="True"
+            Visibility="Collapsed">
             <ProgressRing.Foreground>
                 <SolidColorBrush Color="{StaticResource StackOverflowOrange}" />
             </ProgressRing.Foreground>
         </ProgressRing>
+
         <Grid Margin="0" VerticalAlignment="Top">
             <TextBlock
-                Margin="0,0,0,-1"
+                Margin="0,0,0,0"
                 HorizontalAlignment="Left"
                 Padding="20"
                 Style="{StaticResource SubheaderTextBlockStyle}"
                 Text="Unanswered questions"
+                TextWrapping="NoWrap"
                 d:LayoutOverrides="Height, TopPosition, BottomPosition" />
             <Border
                 Width="40"

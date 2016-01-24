@@ -90,7 +90,6 @@ namespace StackOverflowNotifier.UWP
         private async void TagsButton_Click(object sender, RoutedEventArgs e)
         {
             await TagsDialog.ShowAsync();
-            NotificationHelper.ShowSimpleToastNotification("ads", "asd");
         }
 
         private void DeleteTagButton_Click(object sender, RoutedEventArgs e)

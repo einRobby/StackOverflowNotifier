@@ -30,10 +30,6 @@ namespace StackOverflowNotifier.UWP.Pages
             this.InitializeComponent();
             this.Loaded += SettingsPage_Loaded;
             App.SetColors();
-
-            // Enable back navigation
-            SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
-            SystemNavigationManager.GetForCurrentView().BackRequested += (sender, args) => { if (Frame.CanGoBack) Frame.GoBack(); };
         }
 
         private void SettingsPage_Loaded(object sender, RoutedEventArgs e)
@@ -93,7 +89,7 @@ namespace StackOverflowNotifier.UWP.Pages
             }
 
             BackgroundHelper.RegisterBackgroundTask(timeInterval);
-            ApplicationData.Current.LocalSettings.Values["currentInterval"] = timeInterval;            
+            ApplicationData.Current.LocalSettings.Values["currentInterval"] = timeInterval;
         }
     }
 }

@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:Converter="using:StackOverflowNotifier.UWP.Converter"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:local="using:StackOverflowNotifier"
+    xmlns:local="using:StackOverflowNotifier.UWP"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
@@ -105,8 +105,11 @@
             Grid.RowSpan="3"
             Width="60"
             Height="60"
-            IsActive="True"
-            Visibility="Collapsed" />
+            IsActive="True" Canvas.ZIndex="100" >
+            <ProgressRing.Foreground>
+                <SolidColorBrush Color="{StaticResource StackOverflowOrange}"/>
+            </ProgressRing.Foreground>
+        </ProgressRing>
         <Grid Margin="0" VerticalAlignment="Top">
             <TextBlock
         		HorizontalAlignment="Left"

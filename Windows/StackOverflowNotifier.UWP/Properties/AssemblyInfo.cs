@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Stack Overflow Notifier")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Notifier for incoming and unanswered Stack Overflow questions that matches your selection of tags.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("StackOverflowNotifier")]
-[assembly: AssemblyCopyright("Copyright ©  2016")]
+[assembly: AssemblyProduct("Stack Overflow Notifier")]
+[assembly: AssemblyCopyright("Copyright © Robin-Manuel Thiel 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

@@ -3,13 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowNotifier.UWP", "StackOverflowNotifier\StackOverflowNotifier.UWP.csproj", "{80199993-94C4-4B18-AC0B-1514E0D01969}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowNotifier.UWP", "Windows\StackOverflowNotifier.UWP\StackOverflowNotifier.UWP.csproj", "{80199993-94C4-4B18-AC0B-1514E0D01969}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowNotifier.UWP.BackgroundTask", "StackOverflowNotifier.UWP.BackgroundTask\StackOverflowNotifier.UWP.BackgroundTask.csproj", "{09285D47-8FB6-4308-B037-01D16A4B747C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowNotifier.UWP.BackgroundTask", "Windows\StackOverflowNotifier.UWP.BackgroundTask\StackOverflowNotifier.UWP.BackgroundTask.csproj", "{09285D47-8FB6-4308-B037-01D16A4B747C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowNotifier.Shared", "StackOverflowNotifier.Shared\StackOverflowNotifier.Shared.csproj", "{B9E27900-E69D-4475-AEB0-008A38B8FDC2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowNotifier.UWP.Shared", "StackOverflowNotifier.UWP.Shared\StackOverflowNotifier.UWP.Shared.csproj", "{EF5B9436-DBAB-40F3-A9BE-F8CAA1B3574E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StackOverflowNotifier.UWP.Shared", "Windows\StackOverflowNotifier.UWP.Shared\StackOverflowNotifier.UWP.Shared.csproj", "{EF5B9436-DBAB-40F3-A9BE-F8CAA1B3574E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Windows", "Windows", "{08F718B5-78CC-40D4-ACB2-497E4B50BBDD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -94,5 +96,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{80199993-94C4-4B18-AC0B-1514E0D01969} = {08F718B5-78CC-40D4-ACB2-497E4B50BBDD}
+		{09285D47-8FB6-4308-B037-01D16A4B747C} = {08F718B5-78CC-40D4-ACB2-497E4B50BBDD}
+		{EF5B9436-DBAB-40F3-A9BE-F8CAA1B3574E} = {08F718B5-78CC-40D4-ACB2-497E4B50BBDD}
 	EndGlobalSection
 EndGlobal

@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
-namespace StackOverflowNotifier.Converter
+namespace StackOverflowNotifier.UWP.Converter
 {
     public sealed class DateFormatConverter : IValueConverter
     {

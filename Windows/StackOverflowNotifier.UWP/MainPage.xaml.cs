@@ -21,6 +21,9 @@ using StackOverflowNotifier.UWP.Shared.ViewModels;
 using StackOverflowNotifier.Shared.Models;
 using Windows.ApplicationModel.Background;
 using StackOverflowNotifier.UWP.Shared.Tools;
+using StackOverflowNotifier.UWP.Pages;
+using Windows.Storage;
+using System.Net.Http;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -38,28 +41,16 @@ namespace StackOverflowNotifier.UWP
             App.SetColors();
 
             // Register background task
-            RegisterBackgroundTask();
+            var currentInterval = ApplicationData.Current.LocalSettings.Values["currentInterval"];
+            if (currentInterval != null)
+                BackgroundHelper.RegisterBackgroundTask(Convert.ToUInt32(currentInterval));
+            else
+                BackgroundHelper.RegisterBackgroundTask(60);
+
 
             // Clear notifications
             NotificationHelper.DeleteAllNotifications();
-        }
-
-        private async void RegisterBackgroundTask()
-        {            
-            var taskName = "UnreadNotifierTask";
-            
-            if (!BackgroundTaskRegistration.AllTasks.Any(t => t.Value.Name == taskName))
-            {
-                await BackgroundExecutionManager.RequestAccessAsync();                
-
-                var builder = new BackgroundTaskBuilder();
-                builder.Name = taskName;
-                builder.TaskEntryPoint = "StackOverflowNotifier.UWP.BackgroundTask.UnreadNotifierTask";
-                builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
-                builder.SetTrigger(new TimeTrigger(15, false));
-                builder.Register();
-            }            
-        }
+        }        
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
@@ -72,13 +63,18 @@ namespace StackOverflowNotifier.UWP
         private async Task ReloadQuestions()
         {
             ProgressIndicator.Visibility = Visibility.Visible;
-            await MainViewModel.Current.LoadQuestionsAsync();
-            ProgressIndicator.Visibility = Visibility.Collapsed;
-        }
+            ConnectionFailedMessage.Visibility = Visibility.Collapsed;
 
-        private void LoginButton_Click(object sender, RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(LoginPage));
+            try
+            {
+                await MainViewModel.Current.LoadQuestionsAsync();
+            }
+            catch (HttpRequestException httpRequestException)
+            {
+                ConnectionFailedMessage.Visibility = Visibility.Visible;
+            }
+                        
+            ProgressIndicator.Visibility = Visibility.Collapsed;
         }
 
         private async void QuestionList_ItemClick(object sender, ItemClickEventArgs e)
@@ -115,6 +111,16 @@ namespace StackOverflowNotifier.UWP
         private async void TagsDialog_Closed(ContentDialog sender, ContentDialogClosedEventArgs args)
         {
             await MainViewModel.Current.SaveTagsAsync();
+            await ReloadQuestions();
+        }
+
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SettingsPage));
+        }
+
+        private async void RefreshButton_Click(object sender, RoutedEventArgs e)
+        {
             await ReloadQuestions();
         }
     }

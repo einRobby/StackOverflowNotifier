@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Stack Overflow Notifier")]
 [assembly: AssemblyDescription("Notifier for incoming and unanswered Stack Overflow questions that matches your selection of tags.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Thepagedot")]
 [assembly: AssemblyProduct("Stack Overflow Notifier")]
-[assembly: AssemblyCopyright("Copyright © Robin-Manuel Thiel 2016")]
+[assembly: AssemblyCopyright("Copyright © Thepagedot 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

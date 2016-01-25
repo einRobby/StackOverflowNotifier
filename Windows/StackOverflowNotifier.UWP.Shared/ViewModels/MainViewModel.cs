@@ -66,7 +66,7 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             }
         }
 
-        public async Task LoadQuestionsAsync()
+        public async Task LoadQuestionsAsync(bool saveNewQuestions = true)
         {
             // Load questions for all tags
             var questionLists = new List<List<Question>>();
@@ -93,8 +93,11 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             Questions = new ObservableCollection<Question>(orderedQuestions);
 
             // Save questions locally
-            var newQuestionsJson = await JsonConvert.SerializeObjectAsync(Questions);
-            await LocalStorage.SaveAsync("questions.json", newQuestionsJson);
+            if (saveNewQuestions)
+            {
+                var newQuestionsJson = await JsonConvert.SerializeObjectAsync(Questions);
+                await LocalStorage.SaveAsync("questions.json", newQuestionsJson);
+            }
         }
 
         public async Task SaveTagsAsync()

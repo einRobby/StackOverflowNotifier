@@ -18,8 +18,8 @@ namespace StackOverflowNotifier.UWP.BackgroundTask
             MainViewModel.Current = new MainViewModel();
             await MainViewModel.Current.LoadTagsAsync();
 
-            // Load new questions
-            await MainViewModel.Current.LoadQuestionsAsync();
+            // Load new questions (without saving them locally)
+            await MainViewModel.Current.LoadQuestionsAsync(false);
 
             // Show Notification if needed
             if (MainViewModel.Current.NewQuestionCount > 0)

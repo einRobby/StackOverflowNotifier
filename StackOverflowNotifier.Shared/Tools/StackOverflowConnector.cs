@@ -23,7 +23,7 @@ namespace StackOverflowNotifier.Shared.Tools
         /// <param name="tag">Stack Overflow tag</param>
         /// <param name="size">number of results</param>
         /// <returns>list of questions</returns>
-        public static async Task<List<Question>> GetUnansweredQuestionByTag(string tag, int size = 30)
+        public static async Task<IEnumerable<Question>> GetUnansweredQuestionByTag(string tag, int size = 30)
         {
             var handler = new HttpClientHandler();
             if (handler.SupportsAutomaticDecompression)
@@ -37,7 +37,7 @@ namespace StackOverflowNotifier.Shared.Tools
             var respone = await _HttpClient.GetStringAsync(url);
             var json = JObject.Parse(respone);
 
-            var questions = JsonConvert.DeserializeObject<List<Question>>(json["items"].ToString());
+            var questions = JsonConvert.DeserializeObject<IEnumerable<Question>>(json["items"].ToString());
             return questions;
         }
 
@@ -46,20 +46,22 @@ namespace StackOverflowNotifier.Shared.Tools
         /// </summary>
         /// <param name="questionLists">list of question lists</param>
         /// <returns>ordered and merged questions</returns>
-        public static List<Question> MergeQuestions(List<List<Question>> questionLists)
-        {
-            var mergedQuestions = new List<Question>();
+        public static IEnumerable<Question> MergeQuestions(List<IEnumerable<Question>> questionLists)
+        {            
+            if (!questionLists.Any())
+                return new List<Question>();
 
             // Merge questions
-            foreach (var questions in questionLists)
+            var resultQuestions = questionLists.First();
+            for (var i = 1; i < questionLists.Count; i++)
             {
-                mergedQuestions.InsertRange(0, questions);
+                resultQuestions = resultQuestions.Concat(questionLists[i]);
             }
 
             // Oder questions by date
-            var orderedQuestions = mergedQuestions.OrderByDescending(x => x.CreationDate);
+            resultQuestions = resultQuestions.OrderByDescending(x => x.CreationDate);
 
-            return orderedQuestions.ToList();
+            return resultQuestions;
         }
 
         /// <summary>
@@ -67,16 +69,31 @@ namespace StackOverflowNotifier.Shared.Tools
         /// </summary>
         /// <param name="newQuestions">list of recently loaded questions</param>
         /// <param name="oldQuestions">list of previously lodaded questions to compare</param>
-        public static void MarkNewQuestions(List<Question> newQuestions, List<Question> oldQuestions)
+        public static int MarkNewQuestions(IEnumerable<Question> newQuestions, IEnumerable<Question> oldQuestions)
         {
-            foreach (var question in newQuestions)
+            var newQuestionCount = 0;
+
+            // Previous expression was this
+            //foreach (var question in newQuestions)
+            //{
+            //    var oldQuestion = oldQuestions.FirstOrDefault(q => q.QuestionId == question.QuestionId);
+            //    if (oldQuestion == null)
+            //    {
+            //        question.IsNew = true;
+            //        newQuestionCount++;
+            //    }
+            //}
+
+            // Resharper made this
+            foreach (var question in from question in newQuestions
+                                     let oldQuestion = oldQuestions.FirstOrDefault(q => q.QuestionId == question.QuestionId)
+                                     where oldQuestion == null select question)
             {
-                var oldQuestion = oldQuestions.FirstOrDefault(q => q.QuestionId == question.QuestionId);
-                if (oldQuestion == null)
-                {
-                    question.IsNew = true;
-                }
+                question.IsNew = true;
+                newQuestionCount++;
             }
+
+            return newQuestionCount;
         }
     }
 }

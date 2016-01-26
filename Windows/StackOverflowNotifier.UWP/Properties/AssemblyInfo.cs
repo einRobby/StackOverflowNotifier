@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Stack Overflow Notifier")]
 [assembly: AssemblyDescription("Notifier for incoming and unanswered Stack Overflow questions that matches your selection of tags.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Thepagedot")]
 [assembly: AssemblyProduct("Stack Overflow Notifier")]
-[assembly: AssemblyCopyright("Copyright © Robin-Manuel Thiel 2016")]
+[assembly: AssemblyCopyright("Copyright © Thepagedot 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -24,6 +24,6 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Build and Revision Numbers 
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("1.1.0.0")]
+[assembly: AssemblyFileVersion("1.1.0.0")]
 [assembly: ComVisible(false)]

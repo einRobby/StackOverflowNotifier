@@ -1,3 +1,5 @@
 ﻿1.1
 - Questions are now shown as 'new' when clicking on the notification
+- Performance improvements
 - Design adjustements
+- About page added

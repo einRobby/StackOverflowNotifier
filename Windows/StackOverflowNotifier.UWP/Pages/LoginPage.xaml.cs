@@ -59,7 +59,7 @@ namespace StackOverflowNotifier.UWP.Pages
                 }
 
                 // Show error message, if something went wrong
-                var errorDialog = new MessageDialog("Whoops, we could not log you in successfully. Sorry for that!", "Someting went wrong...");
+                var errorDialog = new MessageDialog("Whoops, we could not log you in successfully. Sorry for that!", "Something went wrong...");
                 await errorDialog.ShowAsync();
                 Frame.GoBack();
             }

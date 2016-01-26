@@ -31,6 +31,10 @@
                     x:Name="SettingsButton"
                     Click="SettingsButton_Click"
                     Label="Settings" />
+                <AppBarButton
+                    x:Name="AboutButton"
+                    Click="AboutButton_OnClick"
+                    Label="About" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

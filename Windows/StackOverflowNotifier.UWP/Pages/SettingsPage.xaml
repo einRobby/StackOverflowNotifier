@@ -2,8 +2,8 @@
     x:Class="StackOverflowNotifier.UWP.Pages.SettingsPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:StackOverflowNotifier.UWP.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:StackOverflowNotifier.UWP.Pages"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
@@ -14,24 +14,37 @@
         </Grid.RowDefinitions>
         <Grid Background="{StaticResource StackOverflowOrangeBrush}" RequestedTheme="Dark">
             <TextBlock
-        		HorizontalAlignment="Left"
-        		Padding="20"
-        		Style="{StaticResource SubheaderTextBlockStyle}"
-        		Text="Settings" Margin="0,0,0,-1" d:LayoutOverrides="Height, TopPosition, BottomPosition" />
+                Margin="0,0,0,-1"
+                HorizontalAlignment="Left"
+                Padding="20"
+                Style="{StaticResource SubheaderTextBlockStyle}"
+                Text="Settings"
+                d:LayoutOverrides="Height, TopPosition, BottomPosition" />
         </Grid>
 
         <StackPanel Grid.Row="1" Margin="20">
-            <ComboBox x:Name="IntervalBox" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="Notification interval" SelectionChanged="IntervalBox_SelectionChanged">
+            <ComboBox
+                x:Name="IntervalBox"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                Header="Notification interval"
+                SelectionChanged="IntervalBox_SelectionChanged">
                 <ComboBoxItem x:Name="IntervalNever" Content="Never" />
                 <ComboBoxItem x:Name="Interval30" Content="30 minutes" />
                 <ComboBoxItem x:Name="Interval60" Content="60 minutes" />
                 <ComboBoxItem x:Name="Interval90" Content="90 minutes" />
+                <ComboBoxItem x:Name="Interval2h" Content="2 hours" />
+                <ComboBoxItem x:Name="Interval6h" Content="6 hours" />
                 <ComboBoxItem x:Name="IntervalOnce" Content="Once a day" />
             </ComboBox>
 
-            <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="This defines, how often the app checks for new unanswered questions. You wll only get notified, if new unanswered questions are available." Margin="0,20,0,0">
+            <TextBlock
+                x:Name="textBlock"
+                Margin="0,20,0,0"
+                Text="This defines, how often the app checks for new unanswered questions. You wll only get notified, if new unanswered questions are available."
+                TextWrapping="Wrap">
                 <TextBlock.Foreground>
-                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}"/>
+                    <SolidColorBrush Color="{ThemeResource SystemBaseMediumColor}" />
                 </TextBlock.Foreground>
             </TextBlock>
         </StackPanel>

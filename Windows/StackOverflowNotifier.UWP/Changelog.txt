@@ -1,0 +1,6 @@
+﻿1.1
+- Added more notification intervals
+- Added About page
+- Bugfixes
+- Performance improvements
+- Design adjustments

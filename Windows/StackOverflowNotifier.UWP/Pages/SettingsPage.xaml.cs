@@ -57,6 +57,12 @@ namespace StackOverflowNotifier.UWP.Pages
                     case 90:
                         IntervalBox.SelectedItem = Interval90;
                         break;
+                    case 120:
+                        IntervalBox.SelectedItem = Interval2h;
+                        break;
+                    case 360:
+                        IntervalBox.SelectedItem = Interval6h;
+                        break;
                     case 720:
                         IntervalBox.SelectedItem = IntervalOnce;
                         break;
@@ -82,6 +88,12 @@ namespace StackOverflowNotifier.UWP.Pages
                     break;
                 case "Interval90":
                     timeInterval = 90;
+                    break;
+                case "Interval2h":
+                    timeInterval = 120;
+                    break;
+                case "Interval6h":
+                    timeInterval = 360;
                     break;
                 case "IntervalOnce":
                     timeInterval = 720;

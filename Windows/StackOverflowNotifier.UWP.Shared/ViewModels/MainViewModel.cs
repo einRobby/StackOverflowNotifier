@@ -66,10 +66,10 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             }
         }
 
-        public async Task LoadQuestionsAsync()
+        public async Task LoadQuestionsAsync(bool saveNewQuestions = true)
         {
             // Load questions for all tags
-            var questionLists = new List<List<Question>>();
+            var questionLists = new List<IEnumerable<Question>>();
             foreach (var tag in Tags)
             {
                 var questionsForTag = await StackOverflowConnector.GetUnansweredQuestionByTag(tag);
@@ -83,9 +83,8 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             var oldQuestionsJson = await LocalStorage.LoadAsync("questions.json");
             if (oldQuestionsJson != null)
             {
-                var oldQuestions = await JsonConvert.DeserializeObjectAsync<ObservableCollection<Question>>(oldQuestionsJson);
-                StackOverflowConnector.MarkNewQuestions(orderedQuestions, oldQuestions.ToList());
-                NewQuestionCount = orderedQuestions.Count(q => q.IsNew);                
+                var oldQuestions = JsonConvert.DeserializeObject<ObservableCollection<Question>>(oldQuestionsJson);
+                NewQuestionCount = StackOverflowConnector.MarkNewQuestions(orderedQuestions, oldQuestions);
             }
 
             // Sync questions with ViewModel
@@ -93,13 +92,16 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             Questions = new ObservableCollection<Question>(orderedQuestions);
 
             // Save questions locally
-            var newQuestionsJson = await JsonConvert.SerializeObjectAsync(Questions);
-            await LocalStorage.SaveAsync("questions.json", newQuestionsJson);
+            if (saveNewQuestions)
+            {
+                var newQuestionsJson = JsonConvert.SerializeObject(Questions);
+                await LocalStorage.SaveAsync("questions.json", newQuestionsJson);
+            }
         }
 
         public async Task SaveTagsAsync()
         {
-            var json = await JsonConvert.SerializeObjectAsync(Tags);
+            var json = JsonConvert.SerializeObject(Tags);
             await LocalStorage.SaveAsync("tags.json", json);
         }
 
@@ -108,7 +110,7 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             var json = await LocalStorage.LoadAsync("tags.json");
             if (json != null)
             {
-                Tags = await JsonConvert.DeserializeObjectAsync<ObservableCollection<string>>(json);
+                Tags = JsonConvert.DeserializeObject<ObservableCollection<string>>(json);
             }            
         }
     }

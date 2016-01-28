@@ -123,5 +123,10 @@ namespace StackOverflowNotifier.UWP
         {
             await ReloadQuestions();
         }
+
+        private void AboutButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutPage));
+        }
     }
 }

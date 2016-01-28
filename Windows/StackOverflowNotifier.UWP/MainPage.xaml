@@ -13,6 +13,7 @@
         <Converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
         <Converter:DateFormatConverter x:Key="DateFormatConverter" />
         <Converter:HtmlDecodeConverter x:Key="HtmlDecodeConverter" />
+        <Converter:IntToVisibilityConverter x:Key="IntToVisibilityConverter" />
     </Page.Resources>
 
     <Page.DataContext>
@@ -30,6 +31,10 @@
                     x:Name="SettingsButton"
                     Click="SettingsButton_Click"
                     Label="Settings" />
+                <AppBarButton
+                    x:Name="AboutButton"
+                    Click="AboutButton_OnClick"
+                    Label="About" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
@@ -41,7 +46,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <!--  Tag Editor  -->
+        <!--  Tag Editor Window  -->
         <ContentDialog
             x:Name="TagsDialog"
             Grid.RowSpan="5"
@@ -105,36 +110,31 @@
             </Grid>
         </ContentDialog>
 
-        <ProgressRing
-            x:Name="ProgressIndicator"
-            Grid.RowSpan="3"
-            Width="60"
-            Height="60"
-            Canvas.ZIndex="100"
-            IsActive="True"
-            Visibility="Collapsed">
-            <ProgressRing.Foreground>
-                <SolidColorBrush Color="{StaticResource StackOverflowOrange}" />
-            </ProgressRing.Foreground>
-        </ProgressRing>
-
         <Grid Margin="0" VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
             <TextBlock
-                Margin="0,0,0,0"
+                Margin="0"
                 HorizontalAlignment="Left"
-                Padding="20"
+                Padding="20,20,0,20"
                 Style="{StaticResource SubheaderTextBlockStyle}"
                 Text="Unanswered questions"
-                TextWrapping="NoWrap"
-                d:LayoutOverrides="Height, TopPosition, BottomPosition" />
+                TextTrimming="CharacterEllipsis"
+                TextWrapping="NoWrap" />
             <Border
+                Grid.Column="1"
                 Width="40"
                 Height="40"
-                Margin="0,10,20,0"
+                Margin="0,28,20,17"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 BorderThickness="1"
-                CornerRadius="40">
+                CornerRadius="40"
+                Visibility="{Binding NewQuestionCount,
+                                     Converter={StaticResource IntToVisibilityConverter}}"
+                d:Visibility="Visible">
                 <Border.Background>
                     <SolidColorBrush Color="White" />
                 </Border.Background>
@@ -149,7 +149,19 @@
             </Border>
         </Grid>
 
-        <!--  Header  -->
+        <ProgressRing
+            x:Name="ProgressIndicator"
+            Grid.Row="0"
+            Grid.RowSpan="3"
+            Width="60"
+            Height="60"
+            Canvas.ZIndex="100"
+            IsActive="True"
+            Visibility="Collapsed">
+            <ProgressRing.Foreground>
+                <SolidColorBrush Color="{StaticResource StackOverflowOrange}" />
+            </ProgressRing.Foreground>
+        </ProgressRing>
 
         <!--  Tags  -->
         <Grid
@@ -167,25 +179,29 @@
                 Click="TagsButton_Click"
                 Content="Tags..." />
 
-            <ListView
+            <ItemsControl
                 x:Name="TagList"
                 Grid.Column="1"
                 ItemsSource="{Binding Tags}"
                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                SelectionMode="None">
-                <ListView.ItemTemplate>
+                ScrollViewer.VerticalScrollBarVisibility="Disabled">
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding}" TextAlignment="Center" />
+                        <Grid
+                            Margin="0,0,5,0"
+                            Background="{StaticResource StackOverflowRedBrush}"
+                            Padding="10, 5">
+                            <TextBlock Text="{Binding}" TextAlignment="Center" />
+                        </Grid>
                     </DataTemplate>
-                </ListView.ItemTemplate>
+                </ItemsControl.ItemTemplate>
 
-                <ListView.ItemsPanel>
+                <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
+                        <VirtualizingStackPanel Orientation="Horizontal" />
                     </ItemsPanelTemplate>
-                </ListView.ItemsPanel>
-            </ListView>
+                </ItemsControl.ItemsPanel>
+            </ItemsControl>
         </Grid>
 
         <!--  Questions  -->
@@ -204,7 +220,8 @@
                         <TextBlock
                             FontSize="16"
                             Style="{StaticResource SubtitleTextBlockStyle}"
-                            Text="{Binding Title, Converter={StaticResource HtmlDecodeConverter}}" />
+                            Text="{Binding Title,
+                                           Converter={StaticResource HtmlDecodeConverter}}" />
                         <Grid Margin="0,5,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -214,7 +231,8 @@
                                 Margin="0"
                                 VerticalAlignment="Bottom"
                                 FontSize="12"
-                                Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}"
+                                Text="{Binding CreationDate,
+                                               Converter={StaticResource DateFormatConverter}}"
                                 d:LayoutOverrides="Width, LeftPosition, RightPosition">
                                 <TextBlock.Foreground>
                                     <SolidColorBrush Color="{ThemeResource SystemBaseMediumHighColor}" />
@@ -227,14 +245,15 @@
                                 VerticalAlignment="Bottom"
                                 FontSize="12"
                                 Text="NEW"
-                                Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}">
+                                Visibility="{Binding IsNew,
+                                                     Converter={StaticResource BooleanToVisibilityConverter},
+                                                     Mode=TwoWay}">
                                 <TextBlock.Foreground>
                                     <SolidColorBrush Color="{StaticResource StackOverflowOrange}" />
                                 </TextBlock.Foreground>
                             </TextBlock>
                         </Grid>
                         <ItemsControl
-                            x:Name="listView"
                             Margin="0,10,0,0"
                             IsHitTestVisible="False"
                             ItemsSource="{Binding Tags}">

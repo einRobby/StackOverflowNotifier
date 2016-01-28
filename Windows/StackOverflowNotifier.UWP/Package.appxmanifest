@@ -1,43 +1,3 @@
-<<<<<<< HEAD
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="29650Thepagedot.StackOverflowNotifier" Publisher="CN=6EE6D6E3-3DCF-4970-92C3-E0B6A669F6E5" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="e1551b1e-83d9-4dd5-905b-7b30fe066b5b" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
-  <Properties>
-    <DisplayName>Stack Overflow Notifier</DisplayName>
-    <PublisherDisplayName>Thepagedot</PublisherDisplayName>
-    <Logo>Assets\StoreLogo.png</Logo>
-  </Properties>
-  <Dependencies>
-    <TargetDeviceFamily Name="Windows.Universal" MinVersion="10.0.0.0" MaxVersionTested="10.0.0.0" />
-  </Dependencies>
-  <Resources>
-    <Resource Language="x-generate" />
-  </Resources>
-  <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="StackOverflowNotifier.App">
-      <uap:VisualElements DisplayName="Stack Overflow Notifier" Square150x150Logo="Assets\Square150x150Logo.png" Square44x44Logo="Assets\Square44x44Logo.png" Description="Notifier for incoming and unanswered Stack Overflow questions that matches your selection of tags." BackgroundColor="#F37E22">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" ShortName="Stack Overflow Notifier">
-          <uap:ShowNameOnTiles>
-            <uap:ShowOn Tile="square150x150Logo" />
-            <uap:ShowOn Tile="wide310x150Logo" />
-          </uap:ShowNameOnTiles>
-        </uap:DefaultTile>
-        <uap:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#F37E22" />
-      </uap:VisualElements>
-      <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="StackOverflowNotifier.UWP.BackgroundTask.UnreadNotifierTask">
-          <BackgroundTasks>
-            <Task Type="timer" />
-          </BackgroundTasks>
-        </Extension>
-      </Extensions>
-    </Application>
-  </Applications>
-  <Capabilities>
-    <Capability Name="internetClient" />
-  </Capabilities>
-=======
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
   <Identity Name="e1551b1e-83d9-4dd5-905b-7b30fe066b5b" Publisher="CN=rothie" Version="1.1.0.0" />
@@ -76,5 +36,4 @@
   <Capabilities>
     <Capability Name="internetClient" />
   </Capabilities>
->>>>>>> origin/master
 </Package>

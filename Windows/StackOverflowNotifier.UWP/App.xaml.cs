@@ -149,9 +149,19 @@ namespace StackOverflowNotifier.UWP
             Frame rootFrame = Window.Current.Content as Frame;
             if (rootFrame == null)
             {
+                // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+
                 rootFrame.NavigationFailed += OnNavigationFailed;
+                rootFrame.Navigated += OnNavigated;
+
+                // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
+
+                // Register a handler for BackRequested events and set the
+                // visibility of the Back button
+                SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
+                SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
             }
 
             // Navigate and pass information

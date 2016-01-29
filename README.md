@@ -9,7 +9,7 @@ Notifier for incoming and unanswered Stack Overflow questions that matches your 
 - Filtering unanswered Stack Overflow questions by tag
 - Merging several lists of unanswered questions
 - Sending notifications when new questions are available
-- Upadting live tile
+- Updating live tile
 
 ## Backlog
 https://trello.com/b/UFtJnlQo/stack-overflow-notifier

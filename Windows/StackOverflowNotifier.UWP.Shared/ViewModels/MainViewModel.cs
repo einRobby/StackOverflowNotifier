@@ -19,7 +19,7 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
         {
             get { return _Current; }
             set { _Current = value; }
-        }        
+        }
 
         private ObservableCollection<Question> _Questions;
         public ObservableCollection<Question> Questions
@@ -57,12 +57,12 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
 
             if (IsInDesignModeStatic)
             {
-                var demoQuestion = new Question() { Title = "Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.", Tags = new List<string> { "windows-10", "office365", "uwp "} };                
-                Questions = new ObservableCollection<Question>();                
+                var demoQuestion = new Question() { Title = "Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.", Tags = new List<string> { "windows-10", "office365", "uwp "} };
+                Questions = new ObservableCollection<Question>();
                 Questions.Add(demoQuestion);
                 Questions.Add(demoQuestion);
 
-                Tags = new ObservableCollection<string>();                
+                Tags = new ObservableCollection<string>();
             }
         }
 
@@ -76,9 +76,10 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
                 questionLists.Add(questionsForTag);
             }
 
-            // Merge and oder questions
+            // Merge and oder questions, remove dublicates
             var orderedQuestions = StackOverflowConnector.MergeQuestions(questionLists);
-           
+            orderedQuestions = orderedQuestions.Distinct();
+
             // Mark new questions
             var oldQuestionsJson = await LocalStorage.LoadAsync("questions.json");
             if (oldQuestionsJson != null)
@@ -111,7 +112,7 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
             if (json != null)
             {
                 Tags = JsonConvert.DeserializeObject<ObservableCollection<string>>(json);
-            }            
+            }
         }
     }
 }

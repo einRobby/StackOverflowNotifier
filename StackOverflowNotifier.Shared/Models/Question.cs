@@ -26,7 +26,7 @@ namespace StackOverflowNotifier.Shared.Models
         {
             get
             {
-                return Helper.FromUnixEpochTime(CreationDateEpoch);
+                return Helper.FromUnixEpochTime(CreationDateEpoch).ToLocalTime();
             }
         }
     }

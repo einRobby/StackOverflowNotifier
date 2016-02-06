@@ -57,7 +57,7 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
 
             if (IsInDesignModeStatic)
             {
-                var demoQuestion = new Question() { Title = "Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.", Tags = new List<string> { "windows-10", "office365", "uwp "} };
+                var demoQuestion = new Question() { Title = "Sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.", Tags = new List<string> { "windows-10", "office365", "uwp"} };
                 Questions = new ObservableCollection<Question>();
                 Questions.Add(demoQuestion);
                 Questions.Add(demoQuestion);
@@ -78,7 +78,6 @@ namespace StackOverflowNotifier.UWP.Shared.ViewModels
 
             // Merge and oder questions, remove dublicates
             var orderedQuestions = StackOverflowConnector.MergeQuestions(questionLists);
-            orderedQuestions = orderedQuestions.Distinct();
 
             // Mark new questions
             var oldQuestionsJson = await LocalStorage.LoadAsync("questions.json");

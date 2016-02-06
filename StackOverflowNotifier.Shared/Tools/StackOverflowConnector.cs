@@ -47,7 +47,7 @@ namespace StackOverflowNotifier.Shared.Tools
         /// <param name="questionLists">list of question lists</param>
         /// <returns>ordered and merged questions</returns>
         public static IEnumerable<Question> MergeQuestions(List<IEnumerable<Question>> questionLists)
-        {            
+        {
             if (!questionLists.Any())
                 return new List<Question>();
 
@@ -60,6 +60,9 @@ namespace StackOverflowNotifier.Shared.Tools
 
             // Oder questions by date
             resultQuestions = resultQuestions.OrderByDescending(x => x.CreationDate);
+
+            // Remove dublicates
+            resultQuestions = resultQuestions.GroupBy(x => x.QuestionId).Select(y => y.First());
 
             return resultQuestions;
         }

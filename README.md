@@ -6,9 +6,10 @@ Notifier for incoming and unanswered Stack Overflow questions that matches your 
 
 
 ## Features
-- Filtering unanswered Stack Overflow questions by tag
+- Filtering unanswered Stack Overflow questions by multiple tag
 - Merging several lists of unanswered questions
 - Sending notifications when new questions are available
+- Adjusting the notification interval
 - Updating live tile
 
 ## Backlog

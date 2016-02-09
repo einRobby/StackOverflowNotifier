@@ -33,7 +33,7 @@ namespace StackOverflowNotifier.Shared.Tools
 
             _HttpClient = new HttpClient(handler);
 
-            var url = $"{_BaseUrl}/2.2/questions/unanswered?pagesize={size}&order=desc&sort=creation&tagged={tag}&site=stackoverflow";
+            var url = $"{_BaseUrl}/2.2/questions/unanswered?pagesize={size}&order=desc&sort=creation&tagged={WebUtility.UrlEncode(tag)}&site=stackoverflow";
             var respone = await _HttpClient.GetStringAsync(url);
             var json = JObject.Parse(respone);
 

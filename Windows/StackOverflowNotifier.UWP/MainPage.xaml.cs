@@ -128,5 +128,15 @@ namespace StackOverflowNotifier.UWP
         {
             Frame.Navigate(typeof(AboutPage));
         }
+
+        private void SaveTagButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (!String.IsNullOrEmpty(NewTagTextBox.Text))
+            {
+                MainViewModel.Current.Tags.Add(NewTagTextBox.Text);
+                NewTagTextBox.Text = String.Empty;
+            }
+        }
+
     }
 }

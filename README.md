@@ -12,5 +12,21 @@ Notifier for incoming and unanswered Stack Overflow questions that matches your 
 - Adjusting the notification interval
 - Updating live tile
 
+## Changelog
+#### 1.3
+- Bugfix: Special chars in tags
+- Changed default notification interval to 6h
+- Added "Add" button for tags
+
+#### 1.2
+- Removed dublicate questions
+
+#### 1.1
+- Added more notification intervals
+- Added About page
+- Bugfixes
+- Performance improvements
+- Design adjustments
+
 ## Backlog
 https://trello.com/b/UFtJnlQo/stack-overflow-notifier

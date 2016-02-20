@@ -1,5 +1,7 @@
 ﻿1.3
 - Bugfix: Special chars in tags
+- Changed default notification interval to 6h
+- Added "Add" button for tags
 
 1.2
 - Removed dublicate questions

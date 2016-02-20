@@ -1,25 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using System.Threading.Tasks;
-using Windows.UI.ViewManagement;
-using Windows.UI;
 using StackOverflowNotifier.UWP.Shared.ViewModels;
 using StackOverflowNotifier.Shared.Models;
-using Windows.ApplicationModel.Background;
 using StackOverflowNotifier.UWP.Shared.Tools;
 using StackOverflowNotifier.UWP.Pages;
 using Windows.Storage;
@@ -45,7 +32,7 @@ namespace StackOverflowNotifier.UWP
             if (currentInterval != null)
                 BackgroundHelper.RegisterBackgroundTask(Convert.ToUInt32(currentInterval));
             else
-                BackgroundHelper.RegisterBackgroundTask(60);
+                BackgroundHelper.RegisterBackgroundTask(360);
 
 
             // Clear notifications
@@ -137,6 +124,5 @@ namespace StackOverflowNotifier.UWP
                 NewTagTextBox.Text = String.Empty;
             }
         }
-
     }
 }

@@ -49,6 +49,7 @@
         <!--  Tag Editor Window  -->
         <ContentDialog
             x:Name="TagsDialog"
+            Title="Tags"
             Grid.RowSpan="5"
             VerticalAlignment="Center"
             Closed="TagsDialog_Closed"
@@ -57,16 +58,10 @@
             <Grid Margin="0,10">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                     <RowDefinition Height="*" />
                 </Grid.RowDefinitions>
 
-                <TextBlock
-                    Margin="0,0,0,10"
-                    Style="{StaticResource SubtitleTextBlockStyle}"
-                    Text="Tags" />
-
-                <Grid Grid.Row="1" Margin="0,0,0,10">
+                <Grid Grid.Row="0" Margin="0,0,0,10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
@@ -76,17 +71,16 @@
                         x:Name="NewTagTextBox"
                         KeyDown="NewTagTextBox_KeyDown"
                         PlaceholderText="Add a new tag" />
-                    <AppBarButton
-                                    x:Name="SaveTagButton"
-                                    Grid.Column="2"
-                                    Click="SaveTagButton_Click"
-                                    Icon="Save"
-                                    IsCompact="True" Width="30" Margin="0,-5,5,0" 
-                                                
-                        />
+                    <Button
+                        x:Name="SaveTagButton"
+                        Grid.Column="1"
+                        Margin="10,0,0,0"
+                        VerticalAlignment="Stretch"
+                        Click="SaveTagButton_Click"
+                        Content="Add" />
                 </Grid>
 
-                <ListView Grid.Row="2" ItemsSource="{Binding Tags}">
+                <ListView Grid.Row="1" ItemsSource="{Binding Tags}">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <Grid>
@@ -102,6 +96,7 @@
                                 <AppBarButton
                                     x:Name="DeleteTagButton"
                                     Grid.Column="1"
+                                    Margin="0,0,-12,0"
                                     Click="DeleteTagButton_Click"
                                     Icon="Cancel"
                                     IsCompact="True" />
@@ -140,8 +135,7 @@
                 VerticalAlignment="Center"
                 BorderThickness="1"
                 CornerRadius="40"
-                Visibility="{Binding NewQuestionCount,
-                                     Converter={StaticResource IntToVisibilityConverter}}"
+                Visibility="{Binding NewQuestionCount, Converter={StaticResource IntToVisibilityConverter}}"
                 d:Visibility="Visible">
                 <Border.Background>
                     <SolidColorBrush Color="White" />
@@ -228,8 +222,7 @@
                         <TextBlock
                             FontSize="16"
                             Style="{StaticResource SubtitleTextBlockStyle}"
-                            Text="{Binding Title,
-                                           Converter={StaticResource HtmlDecodeConverter}}" />
+                            Text="{Binding Title, Converter={StaticResource HtmlDecodeConverter}}" />
                         <Grid Margin="0,5,0,0">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -239,8 +232,7 @@
                                 Margin="0"
                                 VerticalAlignment="Bottom"
                                 FontSize="12"
-                                Text="{Binding CreationDate,
-                                               Converter={StaticResource DateFormatConverter}}"
+                                Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}"
                                 d:LayoutOverrides="Width, LeftPosition, RightPosition">
                                 <TextBlock.Foreground>
                                     <SolidColorBrush Color="{ThemeResource SystemBaseMediumHighColor}" />
@@ -253,9 +245,7 @@
                                 VerticalAlignment="Bottom"
                                 FontSize="12"
                                 Text="NEW"
-                                Visibility="{Binding IsNew,
-                                                     Converter={StaticResource BooleanToVisibilityConverter},
-                                                     Mode=TwoWay}">
+                                Visibility="{Binding IsNew, Converter={StaticResource BooleanToVisibilityConverter}, Mode=TwoWay}">
                                 <TextBlock.Foreground>
                                     <SolidColorBrush Color="{StaticResource StackOverflowOrange}" />
                                 </TextBlock.Foreground>

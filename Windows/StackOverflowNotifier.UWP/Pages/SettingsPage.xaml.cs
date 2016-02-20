@@ -38,7 +38,7 @@ namespace StackOverflowNotifier.UWP.Pages
             if (currentInterval == null)
             {
                 IntervalBox.SelectedItem = Interval60;
-                ApplicationData.Current.LocalSettings.Values["currentInterval"] = 60;
+                ApplicationData.Current.LocalSettings.Values["currentInterval"] = 360;
             }
             else
             {

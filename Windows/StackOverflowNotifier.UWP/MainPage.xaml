@@ -76,6 +76,14 @@
                         x:Name="NewTagTextBox"
                         KeyDown="NewTagTextBox_KeyDown"
                         PlaceholderText="Add a new tag" />
+                    <AppBarButton
+                                    x:Name="SaveTagButton"
+                                    Grid.Column="2"
+                                    Click="SaveTagButton_Click"
+                                    Icon="Save"
+                                    IsCompact="True" Width="30" Margin="0,-5,5,0" 
+                                                
+                        />
                 </Grid>
 
                 <ListView Grid.Row="2" ItemsSource="{Binding Tags}">

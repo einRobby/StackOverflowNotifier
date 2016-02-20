@@ -1,1 +1,1 @@
-Z:\Users\robin-manuel\Documents\Source\Thepagedot\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\AppPackages\StackOverflowNotifier.UWP_1.2.0.0\StackOverflowNotifier.UWP_1.2.0.0_x86_x64_arm.appxbundle
+D:\Source\Privat\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\AppPackages\StackOverflowNotifier.UWP_1.3.0.0\StackOverflowNotifier.UWP_1.3.0.0_x86_x64_arm.appxbundle

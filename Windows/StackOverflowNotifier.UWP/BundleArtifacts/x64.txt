@@ -1,2 +1,2 @@
-MainPackage=Z:\Users\robin-manuel\Documents\Source\Thepagedot\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\bin\x64\Release\StackOverflowNotifier.UWP_1.2.0.0_x64.appx
-SymbolPackage=Z:\Users\robin-manuel\Documents\Source\Thepagedot\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\AppPackages\StackOverflowNotifier.UWP_1.2.0.0\StackOverflowNotifier.UWP_1.2.0.0_x64.appxsym
+MainPackage=D:\Source\Privat\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\bin\x64\Release\StackOverflowNotifier.UWP_1.3.0.0_x64.appx
+SymbolPackage=D:\Source\Privat\StackOverflowNotifier\Windows\StackOverflowNotifier.UWP\AppPackages\StackOverflowNotifier.UWP_1.3.0.0_Test\StackOverflowNotifier.UWP_1.3.0.0_x64.appxsym

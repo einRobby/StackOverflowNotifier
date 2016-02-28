@@ -1,3 +1,6 @@
+![screenshot]
+[screenshot]: https://raw.githubusercontent.com/robinmanuelthiel/StackOverflowNotifier/master/Design/screenshot.PNG "App Screenshot"
+
 # Stack Overflow Notifier
 Notifier for incoming and unanswered Stack Overflow questions that matches your selection of tags.
 

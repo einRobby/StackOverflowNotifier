@@ -9,15 +9,26 @@ namespace StackOverflowNotifier
 {
     public class App : Application
     {
+		public static Bootstrapper Bootstrapper;
+
 		public App()
 		{
+			Bootstrapper = new Bootstrapper();
+
 			// The root page of your application
-			MainPage = new NavigationPage(new MainPage()) 
+
+			var tabbedPage = new TabbedPage();
+			tabbedPage.Title = "Stack Overflow Notifier";
+			tabbedPage.Children.Add(new MainPage());
+			tabbedPage.Children.Add(new TagPage());
+
+			MainPage = new NavigationPage(tabbedPage)
 			{
 				BarBackgroundColor = Color.FromHex("f37e22"),
 				BarTextColor = Color.White
 			};
 
+			Bootstrapper.InitalizeNavigationService(MainPage);
 		}
 
         protected override void OnStart()

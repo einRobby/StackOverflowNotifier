@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Views;
 using StackOverflowNotifier.Shared.Models;
 
 namespace StackOverflowNotifier.Shared
@@ -11,6 +12,7 @@ namespace StackOverflowNotifier.Shared
 	public class MainViewModel : ViewModelBase
 	{
 		private IUrlService _UrlService;
+		private INavigationService _NavigationService;
 		private StackOverflowService _StackOverflowService;
 
 		#region Properties
@@ -64,11 +66,24 @@ namespace StackOverflowNotifier.Shared
 			}
 		}
 
+		private RelayCommand _NavigateToTagsCommand;
+		public RelayCommand NavigateToTagsCommand
+		{
+			get
+			{
+				return _NavigateToTagsCommand ?? (_NavigateToTagsCommand = new RelayCommand(() =>
+				{
+					_NavigationService.NavigateTo("Tags");
+				}));
+			}
+		}
+
 		#endregion
 
-		public MainViewModel(IUrlService urlService, StackOverflowService stackOverflowService)
+		public MainViewModel(IUrlService urlService, INavigationService navigationService, StackOverflowService stackOverflowService)
 		{
 			_UrlService = urlService;
+			_NavigationService = navigationService;
 			_StackOverflowService = stackOverflowService;
 
 			// Preset some tags

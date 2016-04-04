@@ -11,21 +11,21 @@ namespace StackOverflowNotifier
 {
 	public partial class MainPage : ContentPage
 	{
-		public MainViewModel MainViewModel;
 
 		public MainPage()
 		{
 			InitializeComponent();
 
-			MainViewModel = new MainViewModel(new UrlService(), new StackOverflowService(new HttpService()));
-			BindingContext = MainViewModel;
+			// Toolbar
+			ToolbarItems.Add(new ToolbarItem("Tags", "", new Action(() => { App.Bootstrapper.MainViewModel.NavigateToTagsCommand.Execute(null); }), ToolbarItemOrder.Primary, 0));
 		}
 
 		protected override async void OnAppearing()
 		{
 			base.OnAppearing();
+			BindingContext = App.Bootstrapper.MainViewModel;
 
-			await MainViewModel.RefreshAsync();
+			await App.Bootstrapper.MainViewModel.RefreshAsync();
 		}
 
 		// TODO: Can't we do this via Command Bindings?
@@ -34,7 +34,7 @@ namespace StackOverflowNotifier
 			var selectedQuestion = args.SelectedItem as Question;
 			if (selectedQuestion != null)
 			{				
-				MainViewModel.OpenQuestionCommand.Execute(selectedQuestion);
+				App.Bootstrapper.MainViewModel.OpenQuestionCommand.Execute(selectedQuestion);
 			}
 		}
 	}

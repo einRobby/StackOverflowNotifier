@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage 
+		xmlns="http://xamarin.com/schemas/2014/forms" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+		x:Class="StackOverflowNotifier.TagPage"
+		Title="Tags">
+	<ContentPage.Content>
+		<ListView 
+				ItemsSource="{Binding Tags}" 
+				HasUnevenRows="true">
+				<ListView.ItemTemplate>
+					<DataTemplate>
+						<ViewCell>
+							<StackLayout Padding="10" Orientation="Vertical">
+								<Label Text="{Binding}" FontSize="Small" LineBreakMode="TailTruncation"/>
+							</StackLayout>  
+						</ViewCell>
+					</DataTemplate>
+				</ListView.ItemTemplate>
+			</ListView>
+	</ContentPage.Content>
+</ContentPage>

@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json;
-using StackOverflowNotifier.Shared.Tools;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using StackOverflowNotifier.Shared.Tools;
 
 namespace StackOverflowNotifier.Shared.Models
 {

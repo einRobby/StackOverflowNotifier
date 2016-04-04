@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Newtonsoft.Json.Linq;
 using Xamarin.Forms;
 
 namespace StackOverflowNotifier
 {
     public class App : Application
     {
-        public App()
-        {
+		public App()
+		{
 			// The root page of your application
-			MainPage = new NavigationPage(new MainPage());
-        }
+			MainPage = new NavigationPage(new MainPage()) 
+			{
+				BarBackgroundColor = Color.FromHex("f37e22"),
+				BarTextColor = Color.White
+			};
+
+		}
 
         protected override void OnStart()
         {

@@ -162,7 +162,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\StackOverflowNotifier.Shared\StackOverflowNotifier.Shared.csproj">
+    <ProjectReference Include="..\..\StackOverflowNotifier.Shared\StackOverflowNotifier.Shared1.csproj">
       <Project>{b9e27900-e69d-4475-aeb0-008a38b8fdc2}</Project>
       <Name>StackOverflowNotifier.Shared</Name>
     </ProjectReference>

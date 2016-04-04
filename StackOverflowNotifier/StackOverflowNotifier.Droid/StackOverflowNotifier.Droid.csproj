@@ -117,6 +117,7 @@
   <ItemGroup>
     <ProjectReference Include="..\StackOverflowNotifier\StackOverflowNotifier.csproj">
       <Name>StackOverflowNotifier</Name>
+      <Project>{D5AAF8E4-2480-4EA9-A92B-FFA0656CB5BA}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />

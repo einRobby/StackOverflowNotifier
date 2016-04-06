@@ -10,9 +10,12 @@ namespace StackOverflowNotifier
 		public TagPage()
 		{
 			InitializeComponent();
+
+			// Toolbar
+			ToolbarItems.Add(new ToolbarItem("Settings", "Settings.png", new Action(() => { App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null); }), ToolbarItemOrder.Primary, 0));
 		}
 
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 			BindingContext = App.Bootstrapper.MainViewModel;

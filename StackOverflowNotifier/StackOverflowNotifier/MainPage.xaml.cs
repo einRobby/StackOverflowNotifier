@@ -17,7 +17,7 @@ namespace StackOverflowNotifier
 			InitializeComponent();
 
 			// Toolbar
-			ToolbarItems.Add(new ToolbarItem("Tags", "", new Action(() => { App.Bootstrapper.MainViewModel.NavigateToTagsCommand.Execute(null); }), ToolbarItemOrder.Primary, 0));
+			ToolbarItems.Add(new ToolbarItem("Settings", "Settings.png", new Action(() => { App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null); }), ToolbarItemOrder.Primary, 0));
 		}
 
 		protected override async void OnAppearing()
@@ -35,6 +35,7 @@ namespace StackOverflowNotifier
 			if (selectedQuestion != null)
 			{				
 				App.Bootstrapper.MainViewModel.OpenQuestionCommand.Execute(selectedQuestion);
+				(sender as ListView).SelectedItem = null;
 			}
 		}
 	}

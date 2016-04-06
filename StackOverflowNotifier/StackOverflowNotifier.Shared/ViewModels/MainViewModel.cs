@@ -78,6 +78,18 @@ namespace StackOverflowNotifier.Shared
 			}
 		}
 
+		private RelayCommand _NavigateToSettingsCommand;
+		public RelayCommand NavigateToSettingsCommand
+		{
+			get
+			{
+				return _NavigateToSettingsCommand ?? (_NavigateToSettingsCommand = new RelayCommand(() =>
+				{
+					_NavigationService.NavigateTo("Settings");
+				}));
+			}
+		}
+
 		#endregion
 
 		public MainViewModel(IUrlService urlService, INavigationService navigationService, StackOverflowService stackOverflowService)

@@ -16,11 +16,10 @@ namespace StackOverflowNotifier
 			Bootstrapper = new Bootstrapper();
 
 			// The root page of your application
-
 			var tabbedPage = new TabbedPage();
 			tabbedPage.Title = "Stack Overflow Notifier";
-			tabbedPage.Children.Add(new MainPage());
-			tabbedPage.Children.Add(new TagPage());
+			tabbedPage.Children.Add(new MainPage() { Icon = "Question.png" });
+			tabbedPage.Children.Add(new TagPage() { Icon = "Tag.png" });
 
 			MainPage = new NavigationPage(tabbedPage)
 			{

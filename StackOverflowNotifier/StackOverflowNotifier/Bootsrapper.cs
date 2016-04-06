@@ -30,6 +30,7 @@ namespace StackOverflowNotifier
 			var navigationService = new NavigationService(rootPage);
 			navigationService.Configure(NavigationService.RootPageKey, typeof(MainPage));
 			navigationService.Configure("Tags", typeof(TagPage));
+			navigationService.Configure("Settings", typeof(SettingsPage));
 
 			SimpleIoc.Default.Register<INavigationService>(() => navigationService); ;
 		}

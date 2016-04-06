@@ -120,6 +120,12 @@
     <BundleResource Include="Resources\Icon-Small%402x.png" />
     <BundleResource Include="Resources\Icon-Small%403x.png" />
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
+    <BundleResource Include="Resources\Settings%402x.png" />
+    <BundleResource Include="Resources\Question.png" />
+    <BundleResource Include="Resources\Question%402x.png" />
+    <BundleResource Include="Resources\Settings.png" />
+    <BundleResource Include="Resources\Tag.png" />
+    <BundleResource Include="Resources\Tag%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

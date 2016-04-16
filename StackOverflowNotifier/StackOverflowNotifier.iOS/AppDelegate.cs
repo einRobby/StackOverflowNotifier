@@ -23,8 +23,11 @@ namespace StackOverflowNotifier.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-			app.StatusBarStyle = UIStatusBarStyle.BlackOpaque;
-            LoadApplication(new App());
+
+			//app.StatusBarStyle = UIStatusBarStyle.BlackOpaque;
+			UITabBar.Appearance.SelectedImageTintColor = UIColor.FromRGB(243, 126, 34);
+
+			LoadApplication(new App());
 
 
 

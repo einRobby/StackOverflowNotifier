@@ -5,18 +5,30 @@
 		x:Class="StackOverflowNotifier.TagPage"
 		Title="Tags">
 	<ContentPage.Content>
-		<ListView 
+		<StackLayout>
+			<Grid Padding="10">
+				<Entry x:Name="TagEntry" Placeholder="Add a tag" Completed="TagEntry_Completed" />
+			</Grid>
+
+			<ListView 
 				ItemsSource="{Binding Tags}" 
 				HasUnevenRows="true">
 				<ListView.ItemTemplate>
 					<DataTemplate>
 						<ViewCell>
-							<StackLayout Padding="10" Orientation="Vertical">
-								<Label Text="{Binding}" FontSize="Small" LineBreakMode="TailTruncation"/>
-							</StackLayout>  
+							<Grid Padding="15, 0, 0, 0" >
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="Auto" />
+								</Grid.ColumnDefinitions>
+
+								<Label Text="{Binding}" FontSize="Small" LineBreakMode="TailTruncation" Grid.Column="0" VerticalTextAlignment="Center"/>
+								<Button Text="x" Clicked="RemoveEntry_Clicked" Grid.Column="1"/>
+							</Grid> 
 						</ViewCell>
 					</DataTemplate>
 				</ListView.ItemTemplate>
 			</ListView>
+		</StackLayout>
 	</ContentPage.Content>
 </ContentPage>

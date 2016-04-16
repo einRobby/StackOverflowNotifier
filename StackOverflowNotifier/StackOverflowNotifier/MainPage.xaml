@@ -4,11 +4,12 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:converters="clr-namespace:StackOverflowNotifier.Converters;assembly=StackOverflowNotifier"
 	x:Class="StackOverflowNotifier.MainPage"
-	Title="Unanswered questions">
+	Title="Questions">
 	
 	<ContentPage.Resources>
         <ResourceDictionary>
             <converters:DateFormatConverter x:Key="DateFormatConverter"></converters:DateFormatConverter>
+            <converters:TagListToStringConverter x:Key="TagListToStringConverter"></converters:TagListToStringConverter>
         </ResourceDictionary>
     </ContentPage.Resources>
 	
@@ -22,8 +23,9 @@
 
 			<!-- Questions -->
 			<ListView 
-				ItemsSource="{Binding Questions}" 
+				ItemsSource="{Binding Questions}"
 				RefreshCommand="{Binding RefreshCommand}" 
+				IsRefreshing="{Binding IsBusy}"
 				IsPullToRefreshEnabled="true" 
 				ItemSelected="Question_Selected"
 				HasUnevenRows="true">
@@ -37,8 +39,9 @@
 					<DataTemplate>
 						<ViewCell>
 							<StackLayout Padding="15, 5, 5, 5" Orientation="Vertical">
-								<Label Text="{Binding Title}" FontSize="Small" LineBreakMode="TailTruncation"/>
-								<Label Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}" FontSize="Micro" />
+								<Label Text="{Binding Title}" FontSize="Small" LineBreakMode="WordWrap"/>
+								<Label Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}" FontSize="Micro" TextColor="Gray" />
+								<!--<Label Text="{Binding Tags, Converter={StaticResource TagListToStringConverter}}" FontSize="Micro" TextColor="Gray" Opacity="0.5"/>-->
 							</StackLayout>  
 						</ViewCell>
 					</DataTemplate>

@@ -38,6 +38,13 @@ namespace StackOverflowNotifier.Shared
 			set { _NewQuestionCount = value; RaisePropertyChanged(); }
 		}
 
+		private bool _IsBusy;
+		public bool IsBusy
+		{
+			get { return _IsBusy; }
+			set { _IsBusy = value; RaisePropertyChanged(); }
+		}
+
 		#endregion
 
 		#region Commands
@@ -49,7 +56,9 @@ namespace StackOverflowNotifier.Shared
 			{
 				return _RefreshCommand ?? (_RefreshCommand = new RelayCommand(async () =>
 				{
+					IsBusy = true;
 					await RefreshAsync();
+					IsBusy = false;
 				}));
 			}
 		}
@@ -62,6 +71,30 @@ namespace StackOverflowNotifier.Shared
 				return _OpenQuestionCommand ?? (_OpenQuestionCommand = new RelayCommand<Question>((Question question) =>
 				{
 					_UrlService.OpenUrlInBrowser(question.Link);
+				}));
+			}
+		}
+
+		private RelayCommand<string> _AddTagCommand;
+		public RelayCommand<string> AddTagCommand
+		{
+			get
+			{
+				return _AddTagCommand ?? (_AddTagCommand = new RelayCommand<string>((string tag) =>
+				{
+					Tags.Insert(0, tag.Trim());
+				}));
+			}
+		}
+
+		private RelayCommand<string> _RemoveTagCommand;
+		public RelayCommand<string> RemoveTagCommand
+		{
+			get
+			{
+				return _RemoveTagCommand ?? (_RemoveTagCommand = new RelayCommand<string>((string tag) =>
+				{
+					Tags.Remove(tag.Trim());
 				}));
 			}
 		}

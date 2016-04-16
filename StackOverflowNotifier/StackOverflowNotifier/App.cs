@@ -18,8 +18,14 @@ namespace StackOverflowNotifier
 			// The root page of your application
 			var tabbedPage = new TabbedPage();
 			tabbedPage.Title = "Stack Overflow Notifier";
-			tabbedPage.Children.Add(new MainPage() { Icon = "Question.png" });
-			tabbedPage.Children.Add(new TagPage() { Icon = "Tag.png" });
+			tabbedPage.Children.Add(new MainPage());
+			tabbedPage.Children.Add(new TagPage());
+
+			// On iOS, put the settings menu into the tab bar as it is closer to the iOS design guidelines
+			if (Device.OS == TargetPlatform.iOS)
+			{
+				tabbedPage.Children.Add(new SettingsPage());
+			}
 
 			MainPage = new NavigationPage(tabbedPage)
 			{

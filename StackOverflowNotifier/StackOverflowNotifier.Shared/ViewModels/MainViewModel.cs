@@ -138,8 +138,8 @@ namespace StackOverflowNotifier.Shared
 			Tags.Add("azure");
 
 			Questions = new ObservableCollection<Question>();
-			Questions.Add(new Question { Title = "Lorem ipsum dolor", Link = "http://www.google.de" });
-			Questions.Add(new Question { Title = "Sit amet lorem ipsum dolor", Link = "http://www.google.de" });
+			//Questions.Add(new Question { Title = "Lorem ipsum dolor", Link = "http://www.google.de" });
+			//Questions.Add(new Question { Title = "Sit amet lorem ipsum dolor", Link = "http://www.google.de" });
 		}
 
 		public async Task RefreshAsync()

@@ -39,7 +39,7 @@
 					<DataTemplate>
 						<ViewCell>
 							<StackLayout Padding="15, 5, 5, 5" Orientation="Vertical">
-								<Label Text="{Binding Title}" FontSize="Small" LineBreakMode="WordWrap"/>
+								<Label Text="{Binding Title}" FontSize="Small" LineBreakMode="WordWrap" TextColor="Black"/>
 								<Label Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}" FontSize="Micro" TextColor="Gray" />
 								<!--<Label Text="{Binding Tags, Converter={StaticResource TagListToStringConverter}}" FontSize="Micro" TextColor="Gray" Opacity="0.5"/>-->
 							</StackLayout>  

@@ -11,9 +11,6 @@ namespace StackOverflowNotifier
 		{
 			InitializeComponent();
 
-			// Toolbar
-			ToolbarItems.Add(new ToolbarItem("Settings", "Settings.png", new Action(() => { App.Bootstrapper.MainViewModel.NavigateToSettingsCommand.Execute(null); }), ToolbarItemOrder.Primary, 0));
-
 			// Add icon to tab on iOS
 			if (Device.OS == TargetPlatform.iOS)
 			{

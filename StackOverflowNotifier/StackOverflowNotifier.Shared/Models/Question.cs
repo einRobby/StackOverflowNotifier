@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using StackOverflowNotifier.Shared.Tools;
+using System.Net;
 
 namespace StackOverflowNotifier.Shared.Models
 {
@@ -13,7 +14,7 @@ namespace StackOverflowNotifier.Shared.Models
         [JsonProperty(PropertyName = "question_id")]
         public int QuestionId { get; set; }
         [JsonProperty(PropertyName = "title")]
-        public string Title { get; set; }
+		public string Title { get; set; }
         [JsonProperty(PropertyName = "link")]
         public string Link { get; set; }
         [JsonProperty(PropertyName = "tags")]
@@ -29,5 +30,15 @@ namespace StackOverflowNotifier.Shared.Models
                 return Helper.FromUnixEpochTime(CreationDateEpoch).ToLocalTime();
             }
         }
-    }
+
+		[JsonConstructor]
+		public Question(int questionId, string title, string link, List<string> tags, long createDateEpoch)
+		{
+			this.QuestionId = questionId;
+			this.Title = WebUtility.HtmlDecode(title);
+			this.Link = link;
+			this.Tags = tags;
+			this.CreationDateEpoch = createDateEpoch;
+		}
+	}
 }

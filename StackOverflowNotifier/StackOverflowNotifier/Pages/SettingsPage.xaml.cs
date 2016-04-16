@@ -14,7 +14,7 @@ namespace StackOverflowNotifier
 			// Add icon to tab on iOS
 			if (Device.OS == TargetPlatform.iOS)
 			{
-				Icon = "Setting.png";
+				Icon = "Settings.png";
 			}
 		}
 	}

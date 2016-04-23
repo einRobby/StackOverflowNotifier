@@ -1,34 +1,43 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-		xmlns="http://xamarin.com/schemas/2014/forms" 
-		xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-		x:Class="StackOverflowNotifier.TagPage"
-		Title="Tags">
-	<ContentPage.Content>
-		<StackLayout>
-			<Grid Padding="10">
-				<Entry x:Name="TagEntry" Placeholder="Add a tag" Completed="TagEntry_Completed" />
-			</Grid>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="StackOverflowNotifier.TagPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Tags">
+    <ContentPage.Content>
+        <StackLayout>
+            <Grid Padding="10">
+                <Entry
+                    x:Name="TagEntry"
+                    Completed="TagEntry_Completed"
+                    Placeholder="Add a tag" />
+            </Grid>
 
-			<ListView 
-				ItemsSource="{Binding Tags}" 
-				HasUnevenRows="true">
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<Grid Padding="15, 0, 0, 0" >
-								<Grid.ColumnDefinitions>
-									<ColumnDefinition Width="*" />
-									<ColumnDefinition Width="Auto" />
-								</Grid.ColumnDefinitions>
+            <ListView HasUnevenRows="true" ItemsSource="{Binding Tags}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="15, 0, 0, 0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-								<Label Text="{Binding}" FontSize="Small" LineBreakMode="TailTruncation" Grid.Column="0" VerticalTextAlignment="Center"/>
-								<Button Text="x" Clicked="RemoveEntry_Clicked" Grid.Column="1"/>
-							</Grid> 
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</StackLayout>
-	</ContentPage.Content>
+                                <Label
+                                    Grid.Column="0"
+                                    FontSize="Small"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding}"
+                                    VerticalTextAlignment="Center" />
+                                <Button
+                                    Grid.Column="1"
+                                    Clicked="RemoveEntry_Clicked"
+                                    Text="x" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

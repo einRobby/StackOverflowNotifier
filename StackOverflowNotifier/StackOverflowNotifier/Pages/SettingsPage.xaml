@@ -1,18 +1,25 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="StackOverflowNotifier.SettingsPage" Title="Settings">
-	<ContentPage.Content>
-		<StackLayout Padding="10">
-			<Label Text="Notfications" FontAttributes="Bold" />
-			
-			<Grid>
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="*" />
-					<ColumnDefinition Width="Auto" />
-				</Grid.ColumnDefinitions>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="StackOverflowNotifier.SettingsPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    Title="Settings">
+    <ContentPage.Content>
+        <StackLayout Padding="10">
+            <Label FontAttributes="Bold" Text="Notfications" />
 
-				<Label Text="Notify me on new questions" Grid.Column="0" VerticalTextAlignment="Center"  />
-				<Switch x:Name="NotificationSwitch" Grid.Column="1" />
-			</Grid>
-		</StackLayout>
-	</ContentPage.Content>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    Grid.Column="0"
+                    Text="Notify me on new questions"
+                    VerticalTextAlignment="Center" />
+                <Switch x:Name="NotificationSwitch" Grid.Column="1" />
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

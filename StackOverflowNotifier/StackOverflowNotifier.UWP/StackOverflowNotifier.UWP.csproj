@@ -100,6 +100,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LocalStorageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -128,7 +129,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\StackOverflowNotifier.Shared\StackOverflowNotifier.Shared.csproj">
+      <Project>{f5eb2348-a383-4070-b901-59f6228e9b01}</Project>
+      <Name>StackOverflowNotifier.Shared</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StackOverflowNotifier\StackOverflowNotifier.csproj">
+      <Project>{d5aaf8e4-2480-4ea9-a92b-ffa0656cb5ba}</Project>
       <Name>StackOverflowNotifier</Name>
     </ProjectReference>
   </ItemGroup>

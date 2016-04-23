@@ -13,6 +13,7 @@ namespace StackOverflowNotifier.Shared
 	{
 		private IUrlService _UrlService;
 		private INavigationService _NavigationService;
+		private ILocalStorageService _LocalStorageService;
 		private StackOverflowService _StackOverflowService;
 
 		#region Properties
@@ -80,9 +81,10 @@ namespace StackOverflowNotifier.Shared
 		{
 			get
 			{
-				return _AddTagCommand ?? (_AddTagCommand = new RelayCommand<string>((string tag) =>
+				return _AddTagCommand ?? (_AddTagCommand = new RelayCommand<string>(async (string tag) =>
 				{
 					Tags.Insert(0, tag.Trim());
+					await _LocalStorageService.SaveToFileAsync("tags.json", Tags);
 				}));
 			}
 		}
@@ -92,9 +94,10 @@ namespace StackOverflowNotifier.Shared
 		{
 			get
 			{
-				return _RemoveTagCommand ?? (_RemoveTagCommand = new RelayCommand<string>((string tag) =>
+				return _RemoveTagCommand ?? (_RemoveTagCommand = new RelayCommand<string>(async (string tag) =>
 				{
 					Tags.Remove(tag.Trim());
+					await _LocalStorageService.SaveToFileAsync("tags.json", Tags);
 				}));
 			}
 		}
@@ -125,25 +128,32 @@ namespace StackOverflowNotifier.Shared
 
 		#endregion
 
-		public MainViewModel(IUrlService urlService, INavigationService navigationService, StackOverflowService stackOverflowService)
+		public MainViewModel(IUrlService urlService, INavigationService navigationService, ILocalStorageService localStorageService, StackOverflowService stackOverflowService)
 		{
 			_UrlService = urlService;
 			_NavigationService = navigationService;
+			_LocalStorageService = localStorageService;
 			_StackOverflowService = stackOverflowService;
 
-			// Preset some tags
 			Tags = new ObservableCollection<string>();
-			Tags.Add("windows-10");
-			Tags.Add("office365");
-			Tags.Add("azure");
-
 			Questions = new ObservableCollection<Question>();
-			//Questions.Add(new Question { Title = "Lorem ipsum dolor", Link = "http://www.google.de" });
-			//Questions.Add(new Question { Title = "Sit amet lorem ipsum dolor", Link = "http://www.google.de" });
 		}
 
 		public async Task RefreshAsync()
 		{
+			// Load tags from file
+			var localTags = await _LocalStorageService.LoadFromFileAsync<ObservableCollection<string>>("tags.json");
+			if (localTags != null)
+				Tags = localTags;
+
+			if (Tags.Count == 0)
+			{
+				// Preset some tags
+				Tags.Add("windows-10");
+				Tags.Add("office365");
+				Tags.Add("azure");
+			}
+
 			// Load questions for all tags
 			var questionLists = new List<IEnumerable<Question>>();
 			foreach (var tag in Tags)

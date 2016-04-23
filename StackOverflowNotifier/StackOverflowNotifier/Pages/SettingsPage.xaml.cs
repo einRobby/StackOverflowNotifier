@@ -16,6 +16,8 @@ namespace StackOverflowNotifier
 			{
 				Icon = "Settings.png";
 			}
+
+
 		}
 	}
 }

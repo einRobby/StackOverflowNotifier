@@ -96,11 +96,16 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
+    <Compile Include="Services\LocalStorageService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\StackOverflowNotifier\StackOverflowNotifier.csproj">
       <Name>StackOverflowNotifier</Name>
       <Project>{D5AAF8E4-2480-4EA9-A92B-FFA0656CB5BA}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\StackOverflowNotifier.Shared\StackOverflowNotifier.Shared.csproj">
+      <Project>{F5EB2348-A383-4070-B901-59F6228E9B01}</Project>
+      <Name>StackOverflowNotifier.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -163,6 +168,9 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.0.0.6482\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Xamarin.Forms.targets')" />

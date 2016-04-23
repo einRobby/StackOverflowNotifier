@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="StackOverflowNotifier.SettingsPage" Title="Settings">
 	<ContentPage.Content>
 		<StackLayout Padding="10">
-			<Label Text="Notfications" />
+			<Label Text="Notfications" FontAttributes="Bold" />
 			
 			<Grid>
 				<Grid.ColumnDefinitions>
@@ -10,7 +10,7 @@
 					<ColumnDefinition Width="Auto" />
 				</Grid.ColumnDefinitions>
 
-				<Label Text="Notifications for new questions" Grid.Column="0" VerticalTextAlignment="Center" />
+				<Label Text="Notify me on new questions" Grid.Column="0" VerticalTextAlignment="Center"  />
 				<Switch x:Name="NotificationSwitch" Grid.Column="1" />
 			</Grid>
 		</StackLayout>

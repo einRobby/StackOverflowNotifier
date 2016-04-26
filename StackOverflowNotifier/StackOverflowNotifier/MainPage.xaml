@@ -1,52 +1,78 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-<ContentPage 
-	xmlns="http://xamarin.com/schemas/2014/forms"
-	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-	xmlns:converters="clr-namespace:StackOverflowNotifier.Converters;assembly=StackOverflowNotifier"
-	x:Class="StackOverflowNotifier.MainPage"
-	Title="Questions">
-	
-	<ContentPage.Resources>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    x:Class="StackOverflowNotifier.MainPage"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:converters="clr-namespace:StackOverflowNotifier.Converters;assembly=StackOverflowNotifier"
+    Title="Questions">
+
+    <ContentPage.Resources>
         <ResourceDictionary>
-            <converters:DateFormatConverter x:Key="DateFormatConverter"></converters:DateFormatConverter>
-            <converters:TagListToStringConverter x:Key="TagListToStringConverter"></converters:TagListToStringConverter>
+            <converters:DateFormatConverter x:Key="DateFormatConverter" />
+            <converters:TagListToStringConverter x:Key="TagListToStringConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
-	
-	<ContentPage.Content>
-		<StackLayout>
 
-			<!-- Header -->
-			<!--<StackLayout Padding="10" BackgroundColor="#F37E22">
+    <ContentPage.Content>
+        <StackLayout>
+
+            <!--  Header  -->
+            <!--<StackLayout Padding="10" BackgroundColor="#F37E22">
 				<Button Grid.Row="1" Text="Tags..." HorizontalOptions="Start" Command="{Binding NavigateToTagsCommand}"/>
 			</StackLayout>-->
 
-			<!-- Questions -->
-			<ListView 
-				ItemsSource="{Binding Questions}"
-				RefreshCommand="{Binding RefreshCommand}" 
-				IsRefreshing="{Binding IsBusy}"
-				IsPullToRefreshEnabled="true" 
-				ItemSelected="Question_Selected"
-				HasUnevenRows="true">
-				<!--<ListView.Header>
+            <!--  Questions  -->
+            <ListView
+                HasUnevenRows="true"
+                IsPullToRefreshEnabled="true"
+                IsRefreshing="{Binding IsBusy}"
+                ItemSelected="Question_Selected"
+                ItemsSource="{Binding Questions}"
+                RefreshCommand="{Binding RefreshCommand}">
+                <!--<ListView.Header>
 					<Grid BackgroundColor="#F37E22" Padding="15, 5, 5, 5">
 						<Label Text="adsa" FontSize="Small" LineBreakMode="TailTruncation" />
-					</Grid>										
+					</Grid>
 				</ListView.Header>-->
-				
-				<ListView.ItemTemplate>
-					<DataTemplate>
-						<ViewCell>
-							<StackLayout Padding="15, 5, 5, 5" Orientation="Vertical">
-								<Label Text="{Binding Title}" FontSize="Small" LineBreakMode="WordWrap" TextColor="Black"/>
-								<Label Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}" FontSize="Micro" TextColor="Gray" />
-								<!--<Label Text="{Binding Tags, Converter={StaticResource TagListToStringConverter}}" FontSize="Micro" TextColor="Gray" Opacity="0.5"/>-->
-							</StackLayout>  
-						</ViewCell>
-					</DataTemplate>
-				</ListView.ItemTemplate>
-			</ListView>
-		</StackLayout>
-	</ContentPage.Content>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <Image
+                                    x:Name="NewIndicator"
+                                    Grid.Column="0"
+                                    Width="20"
+                                    Heigth="20"
+                                    Source="orangedot.png" />
+
+                                <StackLayout
+                                    Grid.Column="1"
+                                    Orientation="Vertical"
+                                    Padding="15, 5, 5, 5">
+                                    <Label
+                                        FontSize="Small"
+                                        LineBreakMode="WordWrap"
+                                        Text="{Binding Title}"
+                                        TextColor="Black" />
+                                    <Label
+                                        FontSize="Micro"
+                                        Text="{Binding CreationDate,
+                                                       Converter={StaticResource DateFormatConverter}}"
+                                        TextColor="Gray" />
+                                    <!--<Label Text="{Binding Tags, Converter={StaticResource TagListToStringConverter}}" FontSize="Micro" TextColor="Gray" Opacity="0.5"/>-->
+                                </StackLayout>
+                            </Grid>
+
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>

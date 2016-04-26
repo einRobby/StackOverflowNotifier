@@ -30,11 +30,27 @@
                 ItemsSource="{Binding Questions}"
 				SeparatorVisibility="None"
                 RefreshCommand="{Binding RefreshCommand}">
-                <!--<ListView.Header>
-					<Grid BackgroundColor="#F37E22" Padding="15, 5, 5, 5">
-						<Label Text="adsa" FontSize="Small" LineBreakMode="TailTruncation" />
+				
+                <ListView.Header>
+					<Grid Padding="25, 10, 10, 10">
+						<Grid.ColumnDefinitions>
+		                    <ColumnDefinition Width="*" />
+		                    <ColumnDefinition Width="Auto" />
+		                </Grid.ColumnDefinitions>
+						
+						<Label Text="Unsanswered questions" Grid.Column="0" FontSize="Medium" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+						<Grid Grid.Column="1" HorizontalOptions="End">
+							<Image
+                                x:Name="NewIndicator"
+                                WidthRequest="30"
+								HeightRequest="30"												
+								VerticalOptions="Center"
+                                Source="orangedot.png" />
+							<Label Text="{Binding NewQuestionCount}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center" />
+						</Grid>
+								
 					</Grid>
-				</ListView.Header>-->
+				</ListView.Header>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>

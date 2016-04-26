@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
+using Newtonsoft.Json;
 using StackOverflowNotifier.Shared.Models;
 
 namespace StackOverflowNotifier.Shared
@@ -139,7 +140,7 @@ namespace StackOverflowNotifier.Shared
 			Questions = new ObservableCollection<Question>();
 		}
 
-		public async Task RefreshAsync()
+		public async Task RefreshAsync(bool saveNewQuestions = true)
 		{
 			// Load tags from file
 			var localTags = await _LocalStorageService.LoadFromFileAsync<ObservableCollection<string>>("tags.json");
@@ -166,22 +167,20 @@ namespace StackOverflowNotifier.Shared
 			var orderedQuestions = _StackOverflowService.MergeQuestions(questionLists);
 
 			// Mark new questions
-			//var oldQuestionsJson = await LocalStorage.LoadAsync("questions.json");
-			//if (oldQuestionsJson != null)
-			//{
-			//	var oldQuestions = JsonConvert.DeserializeObject<ObservableCollection<Question>>(oldQuestionsJson);
-			//	NewQuestionCount = StackOverflowConnector.MarkNewQuestions(orderedQuestions, oldQuestions);
-			//}
+			var oldQuestions = await _LocalStorageService.LoadFromFileAsync<ObservableCollection<Question>>("questions.json");
+			if (oldQuestions != null)
+			{
+				NewQuestionCount = _StackOverflowService.MarkNewQuestions(orderedQuestions, oldQuestions);
+			}
 
 			// Sync questions with ViewModel
 			Questions = new ObservableCollection<Question>(orderedQuestions);
 
 			// Save questions locally
-			//if (saveNewQuestions)
-			//{
-			//	var newQuestionsJson = JsonConvert.SerializeObject(Questions);
-			//	await LocalStorage.SaveAsync("questions.json", newQuestionsJson);
-			//}
+			if (saveNewQuestions)
+			{
+				await _LocalStorageService.SaveToFileAsync("questions.json", Questions);
+			}
 		}
 	}
 }

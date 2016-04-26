@@ -10,7 +10,7 @@ namespace StackOverflowNotifier.iOS
 {
 	public class LocalStorageService : ILocalStorageService
 	{
-		private readonly JsonSerializerSettings _JsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.Objects };
+		private readonly JsonSerializerSettings _JsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
 		public async Task SaveToFileAsync(string fileName, object content)
 		{
@@ -33,7 +33,7 @@ namespace StackOverflowNotifier.iOS
 			{
 				return default(T);
 			}
-			catch (JsonException)
+			catch (JsonException ex)
 			{
 				return default(T);
 			}

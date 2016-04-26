@@ -31,9 +31,7 @@ namespace StackOverflowNotifier.Shared
 			var response = await _HttpService.GetStringAsync(url);
 			var json = JObject.Parse(response);
 
-			var test = json["items"].ToString();
-
-			var questions = JsonConvert.DeserializeObject<IEnumerable<Question>>(test);
+			var questions = JsonConvert.DeserializeObject<IEnumerable<Question>>(json["items"].ToString());
 			return questions;
 		}
 

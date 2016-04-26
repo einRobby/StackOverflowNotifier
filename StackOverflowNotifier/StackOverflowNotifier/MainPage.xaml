@@ -28,6 +28,7 @@
                 IsRefreshing="{Binding IsBusy}"
                 ItemSelected="Question_Selected"
                 ItemsSource="{Binding Questions}"
+				SeparatorVisibility="None"
                 RefreshCommand="{Binding RefreshCommand}">
                 <!--<ListView.Header>
 					<Grid BackgroundColor="#F37E22" Padding="15, 5, 5, 5">
@@ -38,37 +39,33 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-
-                                <Image
-                                    x:Name="NewIndicator"
-                                    Grid.Column="0"
-                                    Width="20"
-                                    Heigth="20"
-                                    Source="orangedot.png" />
-
-                                <StackLayout
-                                    Grid.Column="1"
-                                    Orientation="Vertical"
-                                    Padding="15, 5, 5, 5">
-                                    <Label
+                            <StackLayout Orientation="Vertical" Padding="0, 10, 10, 10">
+                            	<StackLayout Orientation="Horizontal">
+									<ContentView Padding="10, 0, 5, 0">
+										<Image
+		                                    x:Name="NewIndicator"
+		                                    WidthRequest="5"
+											HeightRequest="5"												
+											VerticalOptions="Center"
+		                                    Source="orangedot.png"
+											IsVisible="{Binding IsNew}"/>
+									</ContentView>
+									
+                                    <Label											
                                         FontSize="Small"
                                         LineBreakMode="WordWrap"
                                         Text="{Binding Title}"
                                         TextColor="Black" />
-                                    <Label
-                                        FontSize="Micro"
-                                        Text="{Binding CreationDate,
-                                                       Converter={StaticResource DateFormatConverter}}"
-                                        TextColor="Gray" />
-                                    <!--<Label Text="{Binding Tags, Converter={StaticResource TagListToStringConverter}}" FontSize="Micro" TextColor="Gray" Opacity="0.5"/>-->
-                                </StackLayout>
-                            </Grid>
+								</StackLayout>
 
+								<ContentView Padding="25, 0, 0, 0">
+	                                <Label
+	                                    FontSize="Micro"
+	                                    Text="{Binding CreationDate, Converter={StaticResource DateFormatConverter}}"									
+	                                    TextColor="Gray" />
+								</ContentView>
+                                <!--<Label Text="{Binding Tags, Converter={StaticResource TagListToStringConverter}}" FontSize="Micro" TextColor="Gray" Opacity="0.5"/>-->
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

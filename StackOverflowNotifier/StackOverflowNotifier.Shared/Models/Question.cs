@@ -20,25 +20,20 @@ namespace StackOverflowNotifier.Shared.Models
         [JsonProperty(PropertyName = "tags")]
         public List<string> Tags { get; set; }
         [JsonProperty(PropertyName = "creation_date")]
-        public long CreationDateEpoch { get; set; }
-        public bool IsNew { get; set; }
-
-        public DateTime CreationDate
-        {
-            get
-            {
-                return Helper.FromUnixEpochTime(CreationDateEpoch).ToLocalTime();
-            }
-        }
+        public long CreationDateEpoch { get; set; }        
+		[JsonIgnore]
+		public bool IsNew { get; set; }
+		[JsonIgnore]
+        public DateTime CreationDate { get { return Helper.FromUnixEpochTime(CreationDateEpoch).ToLocalTime(); }}
 
 		[JsonConstructor]
-		public Question(int questionId, string title, string link, List<string> tags, long createDateEpoch)
+		public Question(int questionId, string title, string link, List<string> tags, long creationDate)
 		{
 			this.QuestionId = questionId;
 			this.Title = WebUtility.HtmlDecode(title);
 			this.Link = link;
 			this.Tags = tags;
-			this.CreationDateEpoch = createDateEpoch;
+			this.CreationDateEpoch = creationDate;
 		}
 	}
 }

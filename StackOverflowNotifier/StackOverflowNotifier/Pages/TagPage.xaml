@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     x:Class="StackOverflowNotifier.TagPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -6,12 +6,11 @@
     Title="Tags">
     <ContentPage.Content>
         <StackLayout>
-            <Grid Padding="10">
                 <Entry
                     x:Name="TagEntry"
                     Completed="TagEntry_Completed"
+					Margin="10"
                     Placeholder="Add a tag" />
-            </Grid>
 
             <ListView HasUnevenRows="true" ItemsSource="{Binding Tags}">
                 <ListView.ItemTemplate>

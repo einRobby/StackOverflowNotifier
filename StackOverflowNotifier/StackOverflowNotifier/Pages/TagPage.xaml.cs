@@ -33,6 +33,7 @@ namespace StackOverflowNotifier
 		public void TagEntry_Completed(object sender, EventArgs e)
 		{
 			App.Bootstrapper.MainViewModel.AddTagCommand.Execute(TagEntry.Text);
+			TagEntry.Text = string.Empty;
 		}
 
 

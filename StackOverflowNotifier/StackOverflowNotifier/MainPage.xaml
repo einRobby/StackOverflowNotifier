@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ContentPage
     x:Class="StackOverflowNotifier.MainPage"
     xmlns="http://xamarin.com/schemas/2014/forms"
@@ -46,7 +46,7 @@
 								HeightRequest="30"												
 								VerticalOptions="Center"
                                 Source="orangedot.png" />
-							<Label Text="{Binding NewQuestionCount}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center" />
+							<Label Text="{Binding NewQuestionCountS}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center" />
 						</Grid>
 								
 					</Grid>
@@ -63,7 +63,7 @@
 		                                    WidthRequest="5"
 											HeightRequest="5"												
 											VerticalOptions="Center"
-		                                    Source="orangedot.png"
+		                                    Source="orangedot.png"								
 											IsVisible="{Binding IsNew}"/>
 									</ContentView>
 									

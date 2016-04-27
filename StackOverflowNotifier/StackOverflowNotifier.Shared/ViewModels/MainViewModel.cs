@@ -40,6 +40,14 @@ namespace StackOverflowNotifier.Shared
 			set { _NewQuestionCount = value; RaisePropertyChanged(); }
 		}
 
+		public string NewQuestionCountS
+		{
+			get { 
+				return NewQuestionCount.ToString(); 
+			}
+
+		}
+
 		private bool _IsBusy;
 		public bool IsBusy
 		{

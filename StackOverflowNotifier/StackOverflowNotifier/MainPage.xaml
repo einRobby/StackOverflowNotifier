@@ -28,7 +28,7 @@
                 IsRefreshing="{Binding IsBusy}"
                 ItemSelected="Question_Selected"
                 ItemsSource="{Binding Questions}"
-				SeparatorVisibility="None"
+				SeparatorVisibility="Default"
                 RefreshCommand="{Binding RefreshCommand}">
 				
                 <ListView.Header>
@@ -46,7 +46,7 @@
 								HeightRequest="30"												
 								VerticalOptions="Center"
                                 Source="orangedot.png" />
-							<Label Text="{Binding NewQuestionCountS}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center" />
+							<Label x:Name="lblNewQuestionCount" Text="{Binding NewQuestionCount}" TextColor="White" FontSize="Small" VerticalOptions="Center" HorizontalOptions="Center" />
 						</Grid>
 								
 					</Grid>

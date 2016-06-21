@@ -50,5 +50,7 @@
 	<string>LaunchScreen</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleName</key>
+	<string>StackOverflowNotifier</string>
 </dict>
 </plist>

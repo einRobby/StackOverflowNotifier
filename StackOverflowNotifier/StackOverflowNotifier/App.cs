@@ -17,7 +17,7 @@ namespace StackOverflowNotifier
 
 			// The root page of your application
 			var tabbedPage = new TabbedPage();
-			tabbedPage.Title = "Stack Overflow Notifier";
+			tabbedPage.Title = "Stack Overflow";
 			tabbedPage.Children.Add(new MainPage());
 			tabbedPage.Children.Add(new TagPage());
 

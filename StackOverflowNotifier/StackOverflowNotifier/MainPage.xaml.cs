@@ -33,6 +33,7 @@ namespace StackOverflowNotifier
 		{
 			base.OnAppearing();
 			BindingContext = App.Bootstrapper.MainViewModel;
+			lblNewQuestionCount.BindingContext = App.Bootstrapper.MainViewModel;
 
 			await App.Bootstrapper.MainViewModel.RefreshAsync();
 		}
